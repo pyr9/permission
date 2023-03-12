@@ -1,6 +1,8 @@
-package com.pyr.permission.exception;
+package com.pyr.permission.common;
 
 import com.alibaba.fastjson.JSONObject;
+import com.pyr.permission.exception.BaseErrorInfoInterface;
+import com.pyr.permission.exception.CommonEnum;
 import lombok.Data;
 
 @Data

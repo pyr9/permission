@@ -1,5 +1,6 @@
 package com.pyr.permission.exception;
 
+import com.pyr.permission.common.ResultBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
