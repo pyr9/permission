@@ -3,8 +3,12 @@ package com.pyr.permission.dao;
 import com.pyr.permission.model.SysDepartment;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface SysDepartmentMapper {
     int countByNameAndParentId(@Param("parentId") Integer parentId, @Param("name") String name, @Param("id") Integer id);
+
+    List<SysDepartment> getAllDept();
 
     int deleteByPrimaryKey(Integer id);
 

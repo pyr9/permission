@@ -1,6 +1,7 @@
 package com.pyr.permission.controller;
 
 import com.pyr.permission.common.ResultBody;
+import com.pyr.permission.dto.DepartmentLevelDto;
 import com.pyr.permission.param.SysDepartmentParam;
 import com.pyr.permission.service.SysDepartmentService;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @RequestMapping("/sys/dept")
 @Slf4j
@@ -17,6 +20,7 @@ public class SysDepartmentController {
     @Autowired
     private SysDepartmentService sysDepartmentService;
 
+
     @RequestMapping("/save")
     @ResponseBody
     public ResultBody saveDept(SysDepartmentParam param) {
@@ -24,4 +28,10 @@ public class SysDepartmentController {
         return ResultBody.success();
     }
 
+    @RequestMapping("/departmentTree")
+    @ResponseBody
+    public ResultBody tree() {
+        List<DepartmentLevelDto> departmentLevelDto = sysDepartmentService.deptTree();
+        return ResultBody.success(departmentLevelDto);
+    }
 }

@@ -1,6 +1,7 @@
 package com.pyr.permission.service;
 
 import com.pyr.permission.dao.SysDepartmentMapper;
+import com.pyr.permission.dto.DepartmentLevelDto;
 import com.pyr.permission.exception.ParamException;
 import com.pyr.permission.model.SysDepartment;
 import com.pyr.permission.param.SysDepartmentParam;
@@ -10,12 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class SysDepartmentService {
 
     @Autowired
     private SysDepartmentMapper sysDepartmentMapper;
+
+    @Autowired
+    SysTreeService sysTreeService;
 
     public void save(SysDepartmentParam param) {
         BeanValidator.check(param);
@@ -37,6 +42,10 @@ public class SysDepartmentService {
         dept.setCreatorip("127.0.0.1");
         dept.setCreateTime(new Date());
         sysDepartmentMapper.insertSelective(dept);
+    }
+
+    public List<DepartmentLevelDto> deptTree() {
+        return sysTreeService.deptTree();
     }
 
     private boolean checkExist(Integer parentId, String deptName, Integer deptId) {
