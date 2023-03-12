@@ -154,4 +154,19 @@
             creatorIp   = #{creatorip,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="getChildDeptListByLevel" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dept
+        WHERE level like #{level}
+    </select>
+
+    <update id="batchUpdateLevel" parameterType="map">
+        <foreach collection="sysDeptList" item="dept" separator=";">
+            UPDATE sys_dept
+            SET level = #{dept.level}
+            WHERE id = #{dept.id}
+        </foreach>
+    </update>
+
 </mapper>

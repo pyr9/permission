@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@RequestMapping("/sys/dept")
+@RequestMapping("/sys/department")
 @Slf4j
 @Controller
 public class SysDepartmentController {
@@ -27,6 +27,14 @@ public class SysDepartmentController {
         sysDepartmentService.save(param);
         return ResultBody.success();
     }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public ResultBody updateDept(SysDepartmentParam param) {
+        sysDepartmentService.update(param);
+        return ResultBody.success();
+    }
+
 
     @RequestMapping("/departmentTree")
     @ResponseBody

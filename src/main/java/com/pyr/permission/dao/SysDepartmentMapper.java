@@ -21,4 +21,8 @@ public interface SysDepartmentMapper {
     int updateByPrimaryKeySelective(SysDepartment record);
 
     int updateByPrimaryKey(SysDepartment record);
+
+    List<SysDepartment> getChildDeptListByLevel(String s);
+
+    void batchUpdateLevel(List<SysDepartment> deptList);
 }
