@@ -1,4 +1,4 @@
-package com.pyr.permission.dao;
+package com.pyr.permission.mapper;
 
 import com.pyr.permission.model.SysRole;
 

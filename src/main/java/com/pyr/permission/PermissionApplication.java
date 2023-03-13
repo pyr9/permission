@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan("com.pyr.permission.*")
-@MapperScan("com.pyr.permission.*")
+@MapperScan(basePackages = {"com.pyr.permission.mapper"})
 @SpringBootApplication
 public class PermissionApplication {
 

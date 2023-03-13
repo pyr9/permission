@@ -1,9 +1,9 @@
 package com.pyr.permission.service;
 
 import com.google.common.base.Preconditions;
-import com.pyr.permission.dao.SysDepartmentMapper;
 import com.pyr.permission.dto.DepartmentLevelDto;
 import com.pyr.permission.exception.ParamException;
+import com.pyr.permission.mapper.SysDepartmentMapper;
 import com.pyr.permission.model.SysDepartment;
 import com.pyr.permission.param.SysDepartmentParam;
 import com.pyr.permission.util.BeanValidator;
