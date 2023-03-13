@@ -8,15 +8,16 @@ import com.pyr.permission.dto.DepartmentLevelDto;
 import com.pyr.permission.model.SysDepartment;
 import com.pyr.permission.util.LevelUtil;
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Comparator;
 import java.util.List;
 
 @Service
 public class SysTreeService {
-    @Resource
+
+    @Autowired
     private SysDepartmentMapper sysDepartmentMapper;
 
     public List<DepartmentLevelDto> deptTree() {

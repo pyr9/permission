@@ -4,13 +4,12 @@ server:
 ## database ##
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/permission?characterEncoding=UTF-8
-    username: root
-    password: 19980617pyr
+    url: jdbc:postgresql://localhost:5432/permission
+    username: postgres
+    password: 123
+    driver-class-name: org.postgresql.Driver
   flyway:
     enabled: true
-    baseline-on-migrate: true
     locations:
       - classpath:db/migration
 

@@ -20,7 +20,8 @@ import java.util.List;
 public class SysDepartmentService {
 
     @Autowired
-    SysTreeService sysTreeService;
+    private SysTreeService sysTreeService;
+
     @Autowired
     private SysDepartmentMapper sysDepartmentMapper;
 
