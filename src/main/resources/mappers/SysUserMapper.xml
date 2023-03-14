@@ -15,10 +15,26 @@
         <result column="creatorIp" jdbcType="VARCHAR" property="creatorip"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id
-        , user_name, telephone, mail, passward, department_id, status, remark, creator,
+        id, user_name, telephone, mail, passward, department_id, status, remark, creator,
     create_time, creatorIp
     </sql>
+    <select id="countByMail" parameterType="map" resultType="int">
+        SELECT count(1)
+        FROM sys_user
+        WHERE mail = #{mail}
+        <if test="id != null">
+            AND id != #{id}
+        </if>
+    </select>
+
+    <select id="countByTelephone" parameterType="map" resultType="int">
+        SELECT count(1)
+        FROM sys_user
+        WHERE telephone = #{telephone}
+        <if test="id != null">
+            AND id != #{id}
+        </if>
+    </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

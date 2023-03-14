@@ -1,7 +1,16 @@
 package com.pyr.permission.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class SysUser {
     private Integer id;
 
@@ -25,91 +34,15 @@ public class SysUser {
 
     private String creatorip;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone == null ? null : telephone.trim();
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail == null ? null : mail.trim();
-    }
-
-    public String getPassward() {
-        return passward;
-    }
-
-    public void setPassward(String passward) {
-        this.passward = passward == null ? null : passward.trim();
-    }
-
-    public Integer getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getCreatorip() {
-        return creatorip;
-    }
-
-    public void setCreatorip(String creatorip) {
-        this.creatorip = creatorip == null ? null : creatorip.trim();
+    public static SysUser of(String userName, String telephone, String mail, String passward, Integer departmentId, Integer status, String remark) {
+        return SysUser.builder()
+                .userName(userName)
+                .telephone(telephone)
+                .mail(mail)
+                .passward(passward)
+                .departmentId(departmentId)
+                .status(status)
+                .remark(remark)
+                .build();
     }
 }
