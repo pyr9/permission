@@ -8,6 +8,9 @@ public interface SysUserMapper {
 
     int countByTelephone(@Param("telephone") String telephone, @Param("id") Integer id);
 
+    SysUser findByKeyword(@Param("keyword") String keyword);
+
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(SysUser record);

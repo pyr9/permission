@@ -31,4 +31,8 @@ public class MD5Util {
             return null;
         }
     }
+
+    public static void main(String[] args) {
+        System.out.println(MD5Util.encrypt(MD5Util.encrypt("123456")));
+    }
 }

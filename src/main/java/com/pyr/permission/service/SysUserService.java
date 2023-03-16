@@ -58,6 +58,10 @@ public class SysUserService {
         return sysUserMapper.countByTelephone(telephone, userId) > 0;
     }
 
+    /**
+     * 检验重复：email = xxx & userId != 张三id count > 0, 说明有重复的email存在
+     * 对于数据更新的场景: 如果传过来的email和old_email相等，则不需要check是否邮箱重复
+     */
     private void validateParam(UserParam param) {
         if (checkTelephoneExist(param.getTelephone(), param.getId())) {
             throw new ParamException("电话已被占用");
@@ -65,5 +69,9 @@ public class SysUserService {
         if (checkEmailExist(param.getMail(), param.getId())) {
             throw new ParamException("邮箱已被占用");
         }
+    }
+
+    public SysUser findByKeyword(String keyword) {
+        return sysUserMapper.findByKeyword(keyword);
     }
 }

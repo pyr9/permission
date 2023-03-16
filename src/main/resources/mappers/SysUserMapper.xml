@@ -35,6 +35,15 @@
             AND id != #{id}
         </if>
     </select>
+
+    <select id="findByKeyword" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_user
+        WHERE telephone = #{keyword}
+        OR mail = #{keyword}
+    </select>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
