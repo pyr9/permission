@@ -1,13 +1,16 @@
 package com.pyr.permission.controller;
 
 
+import com.pyr.permission.common.ResultBody;
 import com.pyr.permission.enums.UserStatus;
 import com.pyr.permission.model.SysUser;
+import com.pyr.permission.param.LoginParam;
 import com.pyr.permission.service.SysUserService;
 import com.pyr.permission.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -16,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-@Controller
+@RestController
 @RequestMapping("/sys/user")
 public class SysLoginController {
 
@@ -25,32 +28,17 @@ public class SysLoginController {
 
 
     @RequestMapping("/login")
-    public void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+    public ResultBody login(@RequestBody LoginParam loginParam) throws IOException, ServletException {
+        String username = loginParam.getUsername();
+        String password = loginParam.getPassword();
 
         SysUser sysUser = sysUserService.findByKeyword(username);
         String errorMsg = checkUser(username, password, sysUser);
 
-        String ret = request.getParameter("ret");
         if (StringUtils.isBlank(errorMsg)) {
-            // login success
-            request.getSession().setAttribute("user", sysUser);
-            if (StringUtils.isNotBlank(ret)) {
-                response.sendRedirect(ret);
-            } else {
-                response.sendRedirect("/admin/index.page"); //TODO
-            }
-            return;
+            return ResultBody.success(sysUser);
         }
-
-        request.setAttribute("error", errorMsg);
-        request.setAttribute("username", username);
-        if (StringUtils.isNotBlank(ret)) {
-            request.setAttribute("ret", ret);
-        }
-        String path = "signin.jsp";
-        request.getRequestDispatcher(path).forward(request, response);
+        return ResultBody.error(errorMsg);
     }
 
     @RequestMapping("/logout")
@@ -73,6 +61,7 @@ public class SysLoginController {
         if (!sysUser.getPassward().equals(MD5Util.encrypt(password))) {
             return "用户名或密码错误";
         }
-        return !Objects.equals(sysUser.getStatus(), UserStatus.DISABLE.getCode()) ? "用户已被冻结，请联系管理员" : "";
+        return Objects.equals(sysUser.getStatus(), UserStatus.DISABLE.getCode()) ? "用户已被冻结，请联系管理员" : "";
     }
+
 }

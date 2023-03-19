@@ -15,7 +15,8 @@
         <result column="creatorIp" jdbcType="VARCHAR" property="creatorip"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, user_name, telephone, mail, passward, department_id, status, remark, creator,
+        id
+        , user_name, telephone, mail, passward, department_id, status, remark, creator,
     create_time, creatorIp
     </sql>
     <select id="countByMail" parameterType="map" resultType="int">
@@ -40,8 +41,7 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM sys_user
-        WHERE telephone = #{keyword}
-        OR mail = #{keyword}
+        WHERE user_name=#{keyword} OR telephone = #{keyword} OR mail = #{keyword}
     </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
