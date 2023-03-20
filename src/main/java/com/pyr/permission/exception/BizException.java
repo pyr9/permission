@@ -14,7 +14,7 @@ public class BizException extends RuntimeException {
     /**
      * 错误码
      */
-    protected String errorCode;
+    protected Integer errorCode;
     /**
      * 错误信息
      */
@@ -26,19 +26,19 @@ public class BizException extends RuntimeException {
     }
 
     public BizException(BaseErrorInfoInterface errorInfoInterface) {
-        super(errorInfoInterface.getResultCode());
+        super(errorInfoInterface.getResultMsg());
         this.errorCode = errorInfoInterface.getResultCode();
         this.errorMsg = errorInfoInterface.getResultMsg();
     }
 
     public BizException(BaseErrorInfoInterface errorInfoInterface, Throwable cause) {
-        super(errorInfoInterface.getResultCode(), cause);
+        super(errorInfoInterface.getResultMsg(), cause);
         this.errorCode = errorInfoInterface.getResultCode();
         this.errorMsg = errorInfoInterface.getResultMsg();
     }
 
-    public BizException(String errorCode, String errorMsg, Throwable cause) {
-        super(errorCode, cause);
+    public BizException(Integer errorCode, String errorMsg, Throwable cause) {
+        super(errorMsg, cause);
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;
     }

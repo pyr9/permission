@@ -10,7 +10,7 @@ public class ResultBody {
     /**
      * 响应代码
      */
-    private String code;
+    private Integer code;
     /**
      * 响应消息
      */
@@ -60,7 +60,7 @@ public class ResultBody {
     /**
      * 失败
      */
-    public static ResultBody error(String code, String message) {
+    public static ResultBody error(Integer code, String message) {
         ResultBody rb = new ResultBody();
         rb.setCode(code);
         rb.setMessage(message);
@@ -73,7 +73,7 @@ public class ResultBody {
      */
     public static ResultBody error(String message) {
         ResultBody rb = new ResultBody();
-        rb.setCode("-1");
+        rb.setCode(-1);
         rb.setMessage(message);
         rb.setResult(null);
         return rb;

@@ -16,7 +16,7 @@ public class GlobalExceptionHandlerTest {
         System.out.println("开始新增...");
         //如果姓名为空就手动抛出一个自定义的异常！
         if (user.getUserName() == null) {
-            throw new BizException("-1", "用户姓名不能为空！");
+            throw new BizException(-1, "用户姓名不能为空！");
         }
         return true;
     }
