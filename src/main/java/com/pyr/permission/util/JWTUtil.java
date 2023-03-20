@@ -21,15 +21,13 @@ import java.util.Map;
  */
 public class JWTUtil {
 
-    // jwt加密使用的密钥
-    private static final String CREDENTIAL_SECRET = "glkjSDGFKLJAHRTLKADGH2389675NALSKDFJG";
-
-    // 加密使用的算法
-    public static final Algorithm ALGORITHM = Algorithm.HMAC256(CREDENTIAL_SECRET);
-
     // 7天过期
     public static final long EXPIRATION = 24 * 60 * 60 * 1000 * 7;
     public static final String USER_ID = "userId";
+    // jwt加密使用的密钥
+    private static final String CREDENTIAL_SECRET = "glkjSDGFKLJAHRTLKADGH2389675NALSKDFJG";
+    // 加密使用的算法
+    public static final Algorithm ALGORITHM = Algorithm.HMAC256(CREDENTIAL_SECRET);
 
     /**
      * 生成token
@@ -41,7 +39,8 @@ public class JWTUtil {
                 .withSubject("permission-sso-jwt")
                 .withClaim(USER_ID, u.getId())
                 .withExpiresAt(expireDate)
-                .sign(Algorithm.HMAC256(u.getPassward()));
+                .withIssuedAt(new Date())
+                .sign(ALGORITHM);
     }
 
     /**
@@ -79,6 +78,6 @@ public class JWTUtil {
     }
 
     private static DecodedJWT getDecodedJWT(String token) {
-        return JWT.require(JWTUtil.ALGORITHM).build().verify(token);
+        return JWT.require(ALGORITHM).build().verify(token);
     }
 }
