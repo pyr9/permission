@@ -1,7 +1,9 @@
 package com.pyr.permission.controller;
 
 
+import com.pyr.permission.common.RequestHolder;
 import com.pyr.permission.common.ResultBody;
+import com.pyr.permission.model.SysUser;
 import com.pyr.permission.param.UserParam;
 import com.pyr.permission.service.SysUserService;
 import org.springframework.stereotype.Controller;
@@ -32,4 +34,10 @@ public class SysUserController {
         return ResultBody.success();
     }
 
+    @RequestMapping("/getUserInfo")
+    @ResponseBody
+    public ResultBody getUserInfo() {
+        SysUser currentUser = RequestHolder.getCurrentUser();
+        return ResultBody.success(currentUser);
+    }
 }
