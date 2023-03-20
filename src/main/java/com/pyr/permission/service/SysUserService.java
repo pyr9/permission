@@ -74,4 +74,8 @@ public class SysUserService {
     public SysUser findByKeyword(String keyword) {
         return sysUserMapper.findByKeyword(keyword);
     }
+
+    public SysUser findById(Integer userId) {
+        return sysUserMapper.selectByPrimaryKey(userId);
+    }
 }

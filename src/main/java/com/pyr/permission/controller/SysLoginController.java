@@ -6,6 +6,7 @@ import com.pyr.permission.enums.UserStatus;
 import com.pyr.permission.model.SysUser;
 import com.pyr.permission.param.LoginParam;
 import com.pyr.permission.service.SysUserService;
+import com.pyr.permission.util.JWTUtil;
 import com.pyr.permission.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +29,7 @@ public class SysLoginController {
 
 
     @RequestMapping("/login")
-    public ResultBody login(@RequestBody LoginParam loginParam) throws IOException, ServletException {
+    public ResultBody login(@RequestBody LoginParam loginParam) {
         String username = loginParam.getUsername();
         String password = loginParam.getPassword();
 
@@ -36,7 +37,8 @@ public class SysLoginController {
         String errorMsg = checkUser(username, password, sysUser);
 
         if (StringUtils.isBlank(errorMsg)) {
-            return ResultBody.success(sysUser);
+            String jwtToken = JWTUtil.createToken(sysUser);
+            return ResultBody.success(jwtToken);
         }
         return ResultBody.error(errorMsg);
     }
