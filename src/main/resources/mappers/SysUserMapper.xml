@@ -188,4 +188,17 @@
             creatorIp     = #{creatorip,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="countByDepartmentId" parameterType="int" resultType="int">
+        SELECT count(1)
+        FROM sys_user
+        WHERE department_id = #{deptId}
+    </select>
+
+    <select id="pageByDepartmentId" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_user
+        WHERE department_id = #{deptId}
+        LIMIT #{page.offset}, #{page.pageSize}
+    </select>
 </mapper>

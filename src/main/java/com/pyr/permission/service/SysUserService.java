@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import com.pyr.permission.exception.ParamException;
 import com.pyr.permission.mapper.SysUserMapper;
 import com.pyr.permission.model.SysUser;
+import com.pyr.permission.page.PageQuery;
+import com.pyr.permission.page.PageResult;
 import com.pyr.permission.param.UserParam;
 import com.pyr.permission.util.BeanValidator;
 import com.pyr.permission.util.MD5Util;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class SysUserService {
@@ -77,5 +80,15 @@ public class SysUserService {
 
     public SysUser findById(Integer userId) {
         return sysUserMapper.selectByPrimaryKey(userId);
+    }
+
+    public PageResult<SysUser> pageByDepartmentId(int deptId, PageQuery pageQuery) {
+        BeanValidator.check(pageQuery);
+        int count = sysUserMapper.countByDepartmentId(deptId);
+        if (count > 0) {
+            List<SysUser> list = sysUserMapper.pageByDepartmentId(deptId, pageQuery);
+            return PageResult.<SysUser>builder().total(count).data(list).build();
+        }
+        return PageResult.<SysUser>builder().build();
     }
 }
