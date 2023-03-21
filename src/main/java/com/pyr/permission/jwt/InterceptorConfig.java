@@ -13,6 +13,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 //拦截的路径
                 .addPathPatterns("/**")
                 //排除登录接口
-                .excludePathPatterns("/sys/user/login");
+                .excludePathPatterns("/sys/user/login", "/file/**");
     }
 }
