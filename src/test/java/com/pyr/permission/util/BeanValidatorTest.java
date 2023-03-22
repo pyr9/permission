@@ -1,5 +1,6 @@
 package com.pyr.permission.util;
 
+import com.pyr.permission.common.util.BeanValidator;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.val;

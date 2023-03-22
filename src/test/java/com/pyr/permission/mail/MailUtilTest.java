@@ -1,5 +1,7 @@
 package com.pyr.permission.mail;
 
+import com.pyr.permission.common.mail.Mail;
+import com.pyr.permission.common.mail.MailUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;

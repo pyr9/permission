@@ -1,6 +1,6 @@
 package com.pyr.permission.common;
 
-import com.pyr.permission.util.JsonMapper;
+import com.pyr.permission.common.util.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

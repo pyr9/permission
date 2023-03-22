@@ -2,7 +2,7 @@ package com.pyr.permission.util;
 
 import java.util.Date;
 
-import static com.pyr.permission.util.JWTUtil.EXPIRATION;
+import static com.pyr.permission.common.util.JWTUtil.EXPIRATION;
 
 public class JwtUtilTest {
 

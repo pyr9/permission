@@ -1,8 +1,9 @@
 package com.pyr.permission.util;
 
 import com.pyr.permission.common.ApplicationContextHelper;
-import com.pyr.permission.mapper.SysAclModuleMapper;
-import com.pyr.permission.model.SysAclModule;
+import com.pyr.permission.common.util.JsonMapper;
+import com.pyr.permission.domain.role.mapper.SysAclModuleMapper;
+import com.pyr.permission.domain.role.model.SysAclModule;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

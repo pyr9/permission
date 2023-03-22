@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pyr.permission.mapper.SysRoleMapper">
-    <resultMap id="BaseResultMap" type="com.pyr.permission.model.SysRole">
+<mapper namespace="com.pyr.permission.domain.role.mapper.SysRoleMapper">
+    <resultMap id="BaseResultMap" type="com.pyr.permission.domain.role.model.SysRole">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
@@ -26,7 +26,7 @@
         from sys_role
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.pyr.permission.model.SysRole">
+    <insert id="insert" parameterType="com.pyr.permission.domain.role.model.SysRole">
         insert into sys_role (id, name, type,
                               status, remark, creator_id,
                               create_time, creatorIp)
@@ -34,7 +34,7 @@
                 #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP}, #{creatorIp,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.pyr.permission.model.SysRole">
+    <insert id="insertSelective" parameterType="com.pyr.permission.domain.role.model.SysRole">
         insert into sys_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -89,7 +89,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.pyr.permission.model.SysRole">
+    <update id="updateByPrimaryKeySelective" parameterType="com.pyr.permission.domain.role.model.SysRole">
         update sys_role
         <set>
             <if test="name != null">
@@ -116,13 +116,13 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.pyr.permission.model.SysRole">
+    <update id="updateByPrimaryKey" parameterType="com.pyr.permission.domain.role.model.SysRole">
         update sys_role
         set name        = #{name,jdbcType=VARCHAR},
             type        = #{type,jdbcType=INTEGER},
             status      = #{status,jdbcType=INTEGER},
             remark      = #{remark,jdbcType=VARCHAR},
-            creator_id     = #{creatorId,jdbcType=INTEGER},
+            creator_id  = #{creatorId,jdbcType=INTEGER},
             create_time = #{createTime,jdbcType=TIMESTAMP},
             creatorIp   = #{creatorIp,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}

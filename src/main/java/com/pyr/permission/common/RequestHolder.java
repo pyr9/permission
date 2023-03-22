@@ -1,6 +1,6 @@
 package com.pyr.permission.common;
 
-import com.pyr.permission.model.SysUser;
+import com.pyr.permission.domain.user.model.SysUser;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,7 +1,7 @@
 package com.pyr.permission;
 
-import com.pyr.permission.exception.BizException;
-import com.pyr.permission.model.SysUser;
+import com.pyr.permission.common.exception.BizException;
+import com.pyr.permission.domain.user.model.SysUser;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

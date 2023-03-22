@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pyr.permission.mapper.SysAclModuleMapper">
-    <resultMap id="BaseResultMap" type="com.pyr.permission.model.SysAclModule">
+<mapper namespace="com.pyr.permission.domain.role.mapper.SysAclModuleMapper">
+    <resultMap id="BaseResultMap" type="com.pyr.permission.domain.role.model.SysAclModule">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
@@ -28,7 +28,7 @@
         from sys_acl_module
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.pyr.permission.model.SysAclModule">
+    <insert id="insert" parameterType="com.pyr.permission.domain.role.model.SysAclModule">
         insert into sys_acl_module (id, name, parent_id,
                                     level, status, seq,
                                     remark, creator_id, create_time,
@@ -38,7 +38,7 @@
                 #{remark,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
                 #{creatorIp,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.pyr.permission.model.SysAclModule">
+    <insert id="insertSelective" parameterType="com.pyr.permission.domain.role.model.SysAclModule">
         insert into sys_acl_module
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -105,7 +105,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.pyr.permission.model.SysAclModule">
+    <update id="updateByPrimaryKeySelective" parameterType="com.pyr.permission.domain.role.model.SysAclModule">
         update sys_acl_module
         <set>
             <if test="name != null">
@@ -138,7 +138,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.pyr.permission.model.SysAclModule">
+    <update id="updateByPrimaryKey" parameterType="com.pyr.permission.domain.role.model.SysAclModule">
         update sys_acl_module
         set name        = #{name,jdbcType=VARCHAR},
             parent_id   = #{parentId,jdbcType=INTEGER},
@@ -146,7 +146,7 @@
             status      = #{status,jdbcType=INTEGER},
             seq         = #{seq,jdbcType=INTEGER},
             remark      = #{remark,jdbcType=VARCHAR},
-            creator_id     = #{creatorId,jdbcType=INTEGER},
+            creator_id  = #{creatorId,jdbcType=INTEGER},
             create_time = #{createTime,jdbcType=TIMESTAMP},
             creatorIp   = #{creatorIp,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}

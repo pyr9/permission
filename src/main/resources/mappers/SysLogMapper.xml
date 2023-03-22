@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pyr.permission.mapper.SysLogMapper">
-    <resultMap id="BaseResultMap" type="com.pyr.permission.model.SysLog">
+<mapper namespace="com.pyr.permission.domain.log.mapper.SysLogMapper">
+    <resultMap id="BaseResultMap" type="com.pyr.permission.domain.log.model.SysLog">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="target_id" jdbcType="INTEGER" property="targetId"/>
@@ -29,7 +29,7 @@
         from sys_log
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.pyr.permission.model.SysLog">
+    <insert id="insert" parameterType="com.pyr.permission.domain.log.model.SysLog">
         insert into sys_log (id, type, target_id,
                              old_value, new_value, status,
                              remark, creator_id, create_time,
@@ -39,7 +39,7 @@
                 #{remark,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
                 #{creatorIp,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.pyr.permission.model.SysLog">
+    <insert id="insertSelective" parameterType="com.pyr.permission.domain.log.model.SysLog">
         insert into sys_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -106,7 +106,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.pyr.permission.model.SysLog">
+    <update id="updateByPrimaryKeySelective" parameterType="com.pyr.permission.domain.log.model.SysLog">
         update sys_log
         <set>
             <if test="type != null">
@@ -139,7 +139,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.pyr.permission.model.SysLog">
+    <update id="updateByPrimaryKey" parameterType="com.pyr.permission.domain.log.model.SysLog">
         update sys_log
         set type        = #{type,jdbcType=INTEGER},
             target_id   = #{targetId,jdbcType=INTEGER},
@@ -147,7 +147,7 @@
             new_value   = #{newValue,jdbcType=VARCHAR},
             status      = #{status,jdbcType=INTEGER},
             remark      = #{remark,jdbcType=VARCHAR},
-            creator_id     = #{creatorId,jdbcType=INTEGER},
+            creator_id  = #{creatorId,jdbcType=INTEGER},
             create_time = #{createTime,jdbcType=TIMESTAMP},
             creatorIp   = #{creatorIp,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}

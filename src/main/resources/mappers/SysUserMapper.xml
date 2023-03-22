@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pyr.permission.mapper.SysUserMapper">
-    <resultMap id="BaseResultMap" type="com.pyr.permission.model.SysUser">
+<mapper namespace="com.pyr.permission.domain.user.mapper.SysUserMapper">
+    <resultMap id="BaseResultMap" type="com.pyr.permission.domain.user.model.SysUser">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="user_name" jdbcType="VARCHAR" property="userName"/>
         <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
@@ -55,7 +55,7 @@
         from sys_user
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.pyr.permission.model.SysUser">
+    <insert id="insert" parameterType="com.pyr.permission.domain.user.model.SysUser">
         insert into sys_user (id, user_name, telephone,
                               mail, passward, department_id,
                               status, remark, creator_id,
@@ -65,7 +65,7 @@
                 #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP}, #{creatorIp,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.pyr.permission.model.SysUser">
+    <insert id="insertSelective" parameterType="com.pyr.permission.domain.user.model.SysUser">
         insert into sys_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -138,7 +138,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.pyr.permission.model.SysUser">
+    <update id="updateByPrimaryKeySelective" parameterType="com.pyr.permission.domain.user.model.SysUser">
         update sys_user
         <set>
             <if test="userName != null">
@@ -174,7 +174,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.pyr.permission.model.SysUser">
+    <update id="updateByPrimaryKey" parameterType="com.pyr.permission.domain.user.model.SysUser">
         update sys_user
         set user_name     = #{userName,jdbcType=VARCHAR},
             telephone     = #{telephone,jdbcType=VARCHAR},
