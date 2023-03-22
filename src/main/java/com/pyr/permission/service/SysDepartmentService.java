@@ -1,6 +1,7 @@
 package com.pyr.permission.service;
 
 import com.google.common.base.Preconditions;
+import com.pyr.permission.common.RequestHolder;
 import com.pyr.permission.dto.DepartmentLevelDto;
 import com.pyr.permission.exception.ParamException;
 import com.pyr.permission.mapper.SysDepartmentMapper;
@@ -51,10 +52,9 @@ public class SysDepartmentService {
                 .build();
         String parentLevel = getLevel(param.getParentId());
         after.setLevel(LevelUtil.calculateLevel(parentLevel, param.getParentId()));
+        after.setCreatorId(RequestHolder.getCurrentUser().getId());
         // TODO: 2023/3/12
-        after.setCreator("admin");
-        // TODO: 2023/3/12
-        after.setCreatorip("127.0.0.1");
+        after.setCreatorIp("127.0.0.1");
         after.setCreateTime(new Date());
         return after;
     }

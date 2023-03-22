@@ -11,13 +11,13 @@
         <result column="status" jdbcType="INTEGER" property="status"/>
         <result column="seq" jdbcType="INTEGER" property="seq"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
-        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="creator_id" jdbcType="INTEGER" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="creatorIp" jdbcType="VARCHAR" property="creatorip"/>
+        <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , code, name, acl_module_Id, url, type, status, seq, remark, creator, create_time,
+        , code, name, acl_module_Id, url, type, status, seq, remark, creator_id, create_time,
     creatorIp
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -35,11 +35,11 @@
         insert into sys_acl (id, code, name,
                              acl_module_Id, url, type,
                              status, seq, remark,
-                             creator, create_time, creatorIp)
+                             creator_id, create_time, creatorIp)
         values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
                 #{aclModuleId,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
                 #{status,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
-                #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creatorip,jdbcType=VARCHAR})
+                #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creatorIp,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.pyr.permission.model.SysAcl">
         insert into sys_acl
@@ -71,13 +71,13 @@
             <if test="remark != null">
                 remark,
             </if>
-            <if test="creator != null">
-                creator,
+            <if test="creatorId != null">
+                creator_id,
             </if>
             <if test="createTime != null">
                 create_time,
             </if>
-            <if test="creatorip != null">
+            <if test="creatorIp != null">
                 creatorIp,
             </if>
         </trim>
@@ -109,14 +109,14 @@
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
-            <if test="creator != null">
+            <if test="creatorId != null">
                 #{creator,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="creatorip != null">
-                #{creatorip,jdbcType=VARCHAR},
+            <if test="creatorIp != null">
+                #{creatorIp,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -147,14 +147,14 @@
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
-            <if test="creator != null">
-                creator = #{creator,jdbcType=VARCHAR},
+            <if test="creatorId != null">
+                creator_id = #{creatorId,jdbcType=INTEGER},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="creatorip != null">
-                creatorIp = #{creatorip,jdbcType=VARCHAR},
+            <if test="creatorIp != null">
+                creatorIp = #{creatorIp,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -171,7 +171,7 @@
             remark        = #{remark,jdbcType=VARCHAR},
             creator       = #{creator,jdbcType=VARCHAR},
             create_time   = #{createTime,jdbcType=TIMESTAMP},
-            creatorIp     = #{creatorip,jdbcType=VARCHAR}
+            creatorIp     = #{creatorIp,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

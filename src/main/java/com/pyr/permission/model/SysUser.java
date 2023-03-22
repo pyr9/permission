@@ -28,11 +28,11 @@ public class SysUser {
 
     private String remark;
 
-    private String creator;
+    private Integer creatorId;
 
     private Date createTime;
 
-    private String creatorip;
+    private String creatorIp;
 
     public static SysUser of(String userName, String telephone, String mail, String passward, Integer departmentId, Integer status, String remark) {
         return SysUser.builder()

@@ -9,13 +9,13 @@
         <result column="new_value" jdbcType="VARCHAR" property="newValue"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
-        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="creator_id" jdbcType="INTEGER" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="creatorIp" jdbcType="VARCHAR" property="creatorip"/>
+        <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , type, target_id, old_value, new_value, status, remark, creator, create_time,
+        , type, target_id, old_value, new_value, status, remark, creator_id, create_time,
     creatorIp
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -32,12 +32,12 @@
     <insert id="insert" parameterType="com.pyr.permission.model.SysLog">
         insert into sys_log (id, type, target_id,
                              old_value, new_value, status,
-                             remark, creator, create_time,
+                             remark, creator_id, create_time,
                              creatorIp)
         values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER},
                 #{oldValue,jdbcType=VARCHAR}, #{newValue,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
                 #{remark,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-                #{creatorip,jdbcType=VARCHAR})
+                #{creatorIp,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.pyr.permission.model.SysLog">
         insert into sys_log
@@ -63,13 +63,13 @@
             <if test="remark != null">
                 remark,
             </if>
-            <if test="creator != null">
-                creator,
+            <if test="creatorId != null">
+                creator_id,
             </if>
             <if test="createTime != null">
                 create_time,
             </if>
-            <if test="creatorip != null">
+            <if test="creatorIp != null">
                 creatorIp,
             </if>
         </trim>
@@ -95,14 +95,14 @@
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
-            <if test="creator != null">
+            <if test="creatorId != null">
                 #{creator,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="creatorip != null">
-                #{creatorip,jdbcType=VARCHAR},
+            <if test="creatorIp != null">
+                #{creatorIp,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -127,14 +127,14 @@
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
-            <if test="creator != null">
-                creator = #{creator,jdbcType=VARCHAR},
+            <if test="creatorId != null">
+                creator_id = #{creatorId,jdbcType=INTEGER},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="creatorip != null">
-                creatorIp = #{creatorip,jdbcType=VARCHAR},
+            <if test="creatorIp != null">
+                creatorIp = #{creatorIp,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -147,9 +147,9 @@
             new_value   = #{newValue,jdbcType=VARCHAR},
             status      = #{status,jdbcType=INTEGER},
             remark      = #{remark,jdbcType=VARCHAR},
-            creator     = #{creator,jdbcType=VARCHAR},
+            creator_id     = #{creatorId,jdbcType=INTEGER},
             create_time = #{createTime,jdbcType=TIMESTAMP},
-            creatorIp   = #{creatorip,jdbcType=VARCHAR}
+            creatorIp   = #{creatorIp,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

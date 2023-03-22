@@ -1,6 +1,7 @@
 package com.pyr.permission.service;
 
 import com.google.common.base.Preconditions;
+import com.pyr.permission.common.RequestHolder;
 import com.pyr.permission.exception.ParamException;
 import com.pyr.permission.mapper.SysUserMapper;
 import com.pyr.permission.model.SysUser;
@@ -29,10 +30,9 @@ public class SysUserService {
         String password = PasswordUtil.randomPassword();
         SysUser user = SysUser.of(param.getUsername(), param.getTelephone(), param.getMail(), MD5Util.encrypt(password),
                 param.getDepartmentId(), param.getStatus(), param.getRemark());
+        user.setCreatorId(RequestHolder.getCurrentUser().getId());
         // TODO: 2023/3/12
-        user.setCreator("admin");
-        // TODO: 2023/3/12
-        user.setCreatorip("127.0.0.1");
+        user.setCreatorIp("127.0.0.1");
         user.setCreateTime(new Date());
 
         // TODO: sendEmail
@@ -46,9 +46,9 @@ public class SysUserService {
         Preconditions.checkNotNull(before, "待更新的用户不存在");
         SysUser after = SysUser.builder().id(param.getId()).userName(param.getUsername()).telephone(param.getTelephone()).mail(param.getMail())
                 .departmentId(param.getDepartmentId()).status(param.getStatus()).remark(param.getRemark()).build();
-        after.setCreator("admin");
+        after.setCreatorId(RequestHolder.getCurrentUser().getId());
         // TODO: 2023/3/12
-        after.setCreatorip("127.0.0.1");
+        after.setCreatorIp("127.0.0.1");
         after.setCreateTime(new Date());
         sysUserMapper.updateByPrimaryKeySelective(after);
     }

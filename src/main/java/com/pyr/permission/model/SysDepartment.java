@@ -23,32 +23,10 @@ public class SysDepartment {
 
     private String remark;
 
-    private String creator;
+    private Integer creatorId;
 
     private Date createTime;
 
-    private String creatorip;
+    private String creatorIp;
 
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-
-    public void setLevel(String level) {
-        this.level = level == null ? null : level.trim();
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
-
-
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
-    }
-
-    public void setCreatorip(String creatorip) {
-        this.creatorip = creatorip == null ? null : creatorip.trim();
-    }
 }
