@@ -8,6 +8,7 @@ import com.pyr.permission.mapper.SysDepartmentMapper;
 import com.pyr.permission.model.SysDepartment;
 import com.pyr.permission.param.SysDepartmentParam;
 import com.pyr.permission.util.BeanValidator;
+import com.pyr.permission.util.IpUtil;
 import com.pyr.permission.util.LevelUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,7 @@ public class SysDepartmentService {
         String parentLevel = getLevel(param.getParentId());
         after.setLevel(LevelUtil.calculateLevel(parentLevel, param.getParentId()));
         after.setCreatorId(RequestHolder.getCurrentUser().getId());
-        // TODO: 2023/3/12
-        after.setCreatorIp("127.0.0.1");
+        after.setCreatorIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
         after.setCreateTime(new Date());
         return after;
     }

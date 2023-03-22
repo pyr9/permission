@@ -9,6 +9,7 @@ import com.pyr.permission.page.PageQuery;
 import com.pyr.permission.page.PageResult;
 import com.pyr.permission.param.UserParam;
 import com.pyr.permission.util.BeanValidator;
+import com.pyr.permission.util.IpUtil;
 import com.pyr.permission.util.MD5Util;
 import com.pyr.permission.util.PasswordUtil;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,7 @@ public class SysUserService {
         SysUser user = SysUser.of(param.getUsername(), param.getTelephone(), param.getMail(), MD5Util.encrypt(password),
                 param.getDepartmentId(), param.getStatus(), param.getRemark());
         user.setCreatorId(RequestHolder.getCurrentUser().getId());
-        // TODO: 2023/3/12
-        user.setCreatorIp("127.0.0.1");
+        user.setCreatorIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
         user.setCreateTime(new Date());
 
         // TODO: sendEmail
@@ -47,8 +47,7 @@ public class SysUserService {
         SysUser after = SysUser.builder().id(param.getId()).userName(param.getUsername()).telephone(param.getTelephone()).mail(param.getMail())
                 .departmentId(param.getDepartmentId()).status(param.getStatus()).remark(param.getRemark()).build();
         after.setCreatorId(RequestHolder.getCurrentUser().getId());
-        // TODO: 2023/3/12
-        after.setCreatorIp("127.0.0.1");
+        after.setCreatorIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
         after.setCreateTime(new Date());
         sysUserMapper.updateByPrimaryKeySelective(after);
     }
