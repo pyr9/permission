@@ -1,11 +1,10 @@
 package com.pyr.permission.domain.department.service;
 
 import com.google.common.base.Preconditions;
-import com.pyr.permission.common.RequestHolder;
 import com.pyr.permission.common.exception.ParamException;
 import com.pyr.permission.common.util.BeanValidator;
-import com.pyr.permission.common.util.IpUtil;
 import com.pyr.permission.common.util.LevelUtil;
+import com.pyr.permission.common.util.SysBeanUtil;
 import com.pyr.permission.domain.department.dto.DepartmentLevelDto;
 import com.pyr.permission.domain.department.mapper.SysDepartmentMapper;
 import com.pyr.permission.domain.department.model.SysDepartment;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -44,18 +42,9 @@ public class SysDepartmentService {
     }
 
     private SysDepartment buildSysDepartment(SysDepartmentParam param) {
-        SysDepartment after = SysDepartment.builder()
-                .id(param.getId())
-                .name(param.getName())
-                .parentId(param.getParentId())
-                .seq(param.getSeq())
-                .remark(param.getRemark())
-                .build();
+        SysDepartment after = (SysDepartment) SysBeanUtil.convert(param, SysDepartment.class);
         String parentLevel = getLevel(param.getParentId());
         after.setLevel(LevelUtil.calculateLevel(parentLevel, param.getParentId()));
-        after.setCreatorId(RequestHolder.getCurrentUser().getId());
-        after.setCreatorIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
-        after.setCreateTime(new Date());
         return after;
     }
 

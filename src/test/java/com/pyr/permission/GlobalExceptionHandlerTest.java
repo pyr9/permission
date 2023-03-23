@@ -15,7 +15,7 @@ public class GlobalExceptionHandlerTest {
     public boolean insert(@RequestBody SysUser user) {
         System.out.println("开始新增...");
         //如果姓名为空就手动抛出一个自定义的异常！
-        if (user.getUserName() == null) {
+        if (user.getUsername() == null) {
             throw new BizException(-1, "用户姓名不能为空！");
         }
         return true;
@@ -44,7 +44,7 @@ public class GlobalExceptionHandlerTest {
         List<SysUser> userList = new ArrayList<>();
         SysUser user2 = new SysUser();
         user2.setId(1);
-        user2.setUserName("xuwujing");
+        user2.setUsername("xuwujing");
         userList.add(user2);
         return userList;
     }

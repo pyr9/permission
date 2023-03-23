@@ -11,6 +11,7 @@
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="creator_id" jdbcType="INTEGER" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
     </resultMap>
     <sql id="Base_Column_List">

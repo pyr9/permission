@@ -13,6 +13,7 @@
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="creator_id" jdbcType="INTEGER" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -35,7 +36,7 @@
         insert into sys_acl (id, code, name,
                              acl_module_Id, url, type,
                              status, seq, remark,
-                             creator_id, create_time, creatorIp)
+                             creator_id, update_time, update_time, creatorIp)
         values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
                 #{aclModuleId,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
                 #{status,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},

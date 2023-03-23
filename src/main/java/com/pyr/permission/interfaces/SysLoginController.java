@@ -60,7 +60,7 @@ public class SysLoginController {
         if (sysUser == null) {
             return "查询不到指定的用户";
         }
-        if (!sysUser.getPassward().equals(MD5Util.encrypt(password))) {
+        if (!sysUser.getPassword().equals(MD5Util.encrypt(password))) {
             return "用户名或密码错误";
         }
         return Objects.equals(sysUser.getStatus(), UserStatus.DISABLE.getCode()) ? "用户已被冻结，请联系管理员" : "";

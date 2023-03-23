@@ -10,11 +10,12 @@
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="creator_id" jdbcType="INTEGER" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , name, parent_id, level, seq, remark, creator_id, create_time, creatorIp
+        , name, parent_id, level, seq, remark, creator_id, update_time,update_time,creatorIp
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -30,7 +31,7 @@
     <insert id="insert" parameterType="com.pyr.permission.domain.department.model.SysDepartment">
         insert into sys_department (id, name, parent_id,
                                     level, seq, remark,
-                                    creator_id, create_time, creatorIp)
+                                    creator_id, update_time, update_time, creatorIp)
         values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER},
                 #{level,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
                 #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creatorIp,jdbcType=VARCHAR})

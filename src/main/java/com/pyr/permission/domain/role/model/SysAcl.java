@@ -1,13 +1,10 @@
 package com.pyr.permission.domain.role.model;
 
+import com.pyr.permission.domain.base.model.BaseEntity;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-public class SysAcl {
-    private Integer id;
-
+public class SysAcl extends BaseEntity {
     private String code;
 
     private String name;
@@ -21,12 +18,4 @@ public class SysAcl {
     private Integer status;
 
     private Integer seq;
-
-    private String remark;
-
-    private Integer creatorId;
-
-    private Date createTime;
-
-    private String creatorIp;
 }

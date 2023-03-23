@@ -1,24 +1,13 @@
 package com.pyr.permission.domain.role.model;
 
+import com.pyr.permission.domain.base.model.BaseEntity;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-public class SysRole {
-    private Integer id;
-
+public class SysRole extends BaseEntity {
     private String name;
 
     private Integer type;
 
     private Integer status;
-
-    private String remark;
-
-    private Integer creatorId;
-
-    private Date createTime;
-
-    private String creatorIp;
 }

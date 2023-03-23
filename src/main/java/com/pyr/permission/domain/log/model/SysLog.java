@@ -1,13 +1,10 @@
 package com.pyr.permission.domain.log.model;
 
+import com.pyr.permission.domain.base.model.BaseEntity;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-public class SysLog {
-    private Integer id;
-
+public class SysLog extends BaseEntity {
     private Integer type;
 
     private Integer targetId;
@@ -17,12 +14,4 @@ public class SysLog {
     private String newValue;
 
     private Integer status;
-
-    private String remark;
-
-    private Integer creatorId;
-
-    private Date createTime;
-
-    private String creatorIp;
 }

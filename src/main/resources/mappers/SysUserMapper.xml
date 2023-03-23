@@ -3,21 +3,22 @@
 <mapper namespace="com.pyr.permission.domain.user.mapper.SysUserMapper">
     <resultMap id="BaseResultMap" type="com.pyr.permission.domain.user.model.SysUser">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="user_name" jdbcType="VARCHAR" property="username"/>
         <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
         <result column="mail" jdbcType="VARCHAR" property="mail"/>
-        <result column="passward" jdbcType="VARCHAR" property="passward"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="department_id" jdbcType="INTEGER" property="departmentId"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="creator_id" jdbcType="INTEGER" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , user_name, telephone, mail, passward, department_id, status, remark, creator_id,
-    create_time, creatorIp
+        , user_name, telephone, mail, password, department_id, status, remark, creator_id,
+    update_time,update_time,creatorIp
     </sql>
     <select id="countByMail" parameterType="map" resultType="int">
         SELECT count(1)
@@ -57,11 +58,11 @@
     </delete>
     <insert id="insert" parameterType="com.pyr.permission.domain.user.model.SysUser">
         insert into sys_user (id, user_name, telephone,
-                              mail, passward, department_id,
+                              mail, password, department_id,
                               status, remark, creator_id,
-                              create_time, creatorIp)
+                              update_time, update_time, creatorIp)
         values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR},
-                #{mail,jdbcType=VARCHAR}, #{passward,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER},
+                #{mail,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER},
                 #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP}, #{creatorIp,jdbcType=VARCHAR})
     </insert>
@@ -80,8 +81,8 @@
             <if test="mail != null">
                 mail,
             </if>
-            <if test="passward != null">
-                passward,
+            <if test="password != null">
+                password,
             </if>
             <if test="departmentId != null">
                 department_id,
@@ -115,8 +116,8 @@
             <if test="mail != null">
                 #{mail,jdbcType=VARCHAR},
             </if>
-            <if test="passward != null">
-                #{passward,jdbcType=VARCHAR},
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
             </if>
             <if test="departmentId != null">
                 #{departmentId,jdbcType=INTEGER},
@@ -150,8 +151,8 @@
             <if test="mail != null">
                 mail = #{mail,jdbcType=VARCHAR},
             </if>
-            <if test="passward != null">
-                passward = #{passward,jdbcType=VARCHAR},
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
             </if>
             <if test="departmentId != null">
                 department_id = #{departmentId,jdbcType=INTEGER},
@@ -179,7 +180,7 @@
         set user_name     = #{userName,jdbcType=VARCHAR},
             telephone     = #{telephone,jdbcType=VARCHAR},
             mail          = #{mail,jdbcType=VARCHAR},
-            passward      = #{passward,jdbcType=VARCHAR},
+            password      = #{password,jdbcType=VARCHAR},
             department_id = #{departmentId,jdbcType=INTEGER},
             status        = #{status,jdbcType=INTEGER},
             remark        = #{remark,jdbcType=VARCHAR},

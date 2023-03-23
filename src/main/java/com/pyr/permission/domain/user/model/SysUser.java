@@ -1,48 +1,37 @@
 package com.pyr.permission.domain.user.model;
 
+import com.pyr.permission.domain.base.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class SysUser {
-    private Integer id;
+public class SysUser extends BaseEntity {
 
-    private String userName;
+    private String username;
 
     private String telephone;
 
     private String mail;
 
-    private String passward;
+    private String password;
 
     private Integer departmentId;
 
     private Integer status;
 
-    private String remark;
-
-    private Integer creatorId;
-
-    private Date createTime;
-
-    private String creatorIp;
-
-    public static SysUser of(String userName, String telephone, String mail, String passward, Integer departmentId, Integer status, String remark) {
+    public static SysUser of(String userName, String telephone, String mail, String password, Integer departmentId, Integer status) {
         return SysUser.builder()
-                .userName(userName)
+                .username(userName)
                 .telephone(telephone)
                 .mail(mail)
-                .passward(passward)
+                .password(password)
                 .departmentId(departmentId)
                 .status(status)
-                .remark(remark)
                 .build();
     }
 }

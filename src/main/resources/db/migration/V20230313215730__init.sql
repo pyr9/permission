@@ -62,12 +62,12 @@ create table sys_user
     user_name     varchar(255) not null,
     telephone     varchar(255) not null,
     mail          varchar(255) not null,
-    passward      varchar(255) not null,
+    password      varchar(255) not null,
     department_id int          not null,
     status        int          not null,
     remark        varchar(255) null,
     creator       varchar(255) null,
-    create_time   timestamp null,
+    create_time   timestamp    null,
     creatorIp     varchar(255) null,
     constraint sys_user_department_id_foreign
         foreign key (department_id) references sys_department (id)

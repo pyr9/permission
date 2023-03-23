@@ -1,22 +1,11 @@
 package com.pyr.permission.domain.role.model;
 
+import com.pyr.permission.domain.base.model.BaseEntity;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-public class SysRoleAcl {
-    private Integer id;
-
+public class SysRoleAcl extends BaseEntity {
     private Integer roleId;
 
     private Integer aclId;
-
-    private String remark;
-
-    private Integer creatorId;
-
-    private Date createTime;
-
-    private String creatorIp;
 }
