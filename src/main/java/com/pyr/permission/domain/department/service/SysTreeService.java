@@ -4,9 +4,13 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.pyr.permission.common.util.LevelUtil;
+import com.pyr.permission.domain.base.model.BaseTreeEntity;
+import com.pyr.permission.domain.department.dto.AclModuleLevelDto;
 import com.pyr.permission.domain.department.dto.DepartmentLevelDto;
 import com.pyr.permission.domain.department.mapper.SysDepartmentMapper;
 import com.pyr.permission.domain.department.model.SysDepartment;
+import com.pyr.permission.domain.role.mapper.SysAclModuleMapper;
+import com.pyr.permission.domain.role.model.SysAclModule;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +23,9 @@ public class SysTreeService {
 
     @Autowired
     private SysDepartmentMapper sysDepartmentMapper;
+
+    @Autowired
+    private SysAclModuleMapper sysAclModuleMapper;
 
     public List<DepartmentLevelDto> deptTree() {
         List<SysDepartment> deptList = sysDepartmentMapper.getAllDept();
@@ -74,4 +81,43 @@ public class SysTreeService {
         }
     }
 
+    public List<AclModuleLevelDto> aclModuleTree() {
+        List<SysAclModule> aclModuleList = sysAclModuleMapper.getAllAclModule();
+        List<AclModuleLevelDto> dtoList = Lists.newArrayList();
+        for (SysAclModule aclModule : aclModuleList) {
+            dtoList.add(AclModuleLevelDto.adapt(aclModule));
+        }
+        return aclModuleListToTree(dtoList);
+    }
+
+    public List<AclModuleLevelDto> aclModuleListToTree(List<AclModuleLevelDto> dtoList) {
+        if (CollectionUtils.isEmpty(dtoList)) {
+            return Lists.newArrayList();
+        }
+        // level -> [aclmodule1, aclmodule2, ...] Map<String, List<Object>>
+        Multimap<String, AclModuleLevelDto> levelAclModuleMap = ArrayListMultimap.create();
+        List<AclModuleLevelDto> rootList = Lists.newArrayList();
+
+        for (AclModuleLevelDto dto : dtoList) {
+            levelAclModuleMap.put(dto.getLevel(), dto);
+            if (LevelUtil.ROOT.equals(dto.getLevel())) {
+                rootList.add(dto);
+            }
+        }
+        rootList.sort(Comparator.comparingInt(BaseTreeEntity::getSeq));
+        transformAclModuleTree(rootList, LevelUtil.ROOT, levelAclModuleMap);
+        return rootList;
+    }
+
+    public void transformAclModuleTree(List<AclModuleLevelDto> dtoList, String level, Multimap<String, AclModuleLevelDto> levelAclModuleMap) {
+        for (AclModuleLevelDto dto : dtoList) {
+            String nextLevel = LevelUtil.calculateLevel(level, dto.getId());
+            List<AclModuleLevelDto> tempList = (List<AclModuleLevelDto>) levelAclModuleMap.get(nextLevel);
+            if (CollectionUtils.isNotEmpty(tempList)) {
+                tempList.sort(Comparator.comparingInt(BaseTreeEntity::getSeq));
+                dto.setAclModuleList(tempList);
+                transformAclModuleTree(tempList, nextLevel, levelAclModuleMap);
+            }
+        }
+    }
 }
