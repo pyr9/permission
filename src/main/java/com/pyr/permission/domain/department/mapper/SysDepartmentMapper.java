@@ -24,5 +24,7 @@ public interface SysDepartmentMapper {
 
     List<SysDepartment> getChildDeptListByLevel(String s);
 
-    void batchUpdateLevel(List<SysDepartment> deptList);
+    void batchUpdateLevel(@Param("sysDeptList") List<SysDepartment> sysDeptList);
+
+    int countByParentId(@Param("parentId") Integer parentId);
 }

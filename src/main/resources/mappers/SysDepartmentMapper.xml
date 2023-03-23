@@ -150,9 +150,28 @@
             AND id != #{id}
         </if>
     </select>
+    <select id="getChildDeptListByLevel" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dept
+        WHERE level like #{level}
+    </select>
+
+    <update id="batchUpdateLevel" parameterType="map">
+        <foreach collection="sysDeptList" item="dept" separator=";">
+            UPDATE sys_dept
+            SET level = #{dept.level}
+            WHERE id = #{dept.id}
+        </foreach>
+    </update>
     <select id="getAllDept" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_department
+    </select>
+    <select id="countByParentId" parameterType="int" resultType="int">
+        SELECT count(1)
+        FROM sys_department
+        WHERE parent_id = #{parentId}
     </select>
 </mapper>

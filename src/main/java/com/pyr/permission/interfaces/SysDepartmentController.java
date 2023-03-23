@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -41,5 +42,12 @@ public class SysDepartmentController {
     public ResultBody tree() {
         List<DepartmentLevelDto> departmentLevelDto = sysDepartmentService.deptTree();
         return ResultBody.success(departmentLevelDto);
+    }
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public ResultBody delete(@RequestParam("id") int id) {
+        sysDepartmentService.delete(id);
+        return ResultBody.success();
     }
 }
