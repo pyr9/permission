@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 @Setter
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class SysDepartment extends BaseTreeEntity {
 }
