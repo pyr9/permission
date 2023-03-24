@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
 @RequestMapping("/sys/user")
@@ -44,10 +45,17 @@ public class SysUserController {
         return ResultBody.success(currentUser);
     }
 
-    @RequestMapping("/page/users")
+    @RequestMapping("/pageUsers")
     @ResponseBody
     public ResultBody page(@RequestParam("departmentId") int deptId, PageQuery pageQuery) {
         PageResult<SysUser> result = sysUserService.pageByDepartmentId(deptId, pageQuery);
         return ResultBody.success(result);
+    }
+
+    @RequestMapping("/users")
+    @ResponseBody
+    public ResultBody allUsers() {
+        List<SysUser> users = sysUserService.getAllUser();
+        return ResultBody.success(users);
     }
 }
