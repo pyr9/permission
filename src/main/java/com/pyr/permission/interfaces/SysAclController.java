@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * @since 2023-03-22 18:09:38
  */
 @RestController
-@RequestMapping("sys/sysAclModule")
+@RequestMapping("sys/acl")
 public class SysAclController {
     /**
      * 服务对象

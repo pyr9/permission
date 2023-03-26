@@ -9,7 +9,6 @@ import com.pyr.permission.domain.department.service.SysTreeService;
 import com.pyr.permission.domain.role.mapper.SysAclModuleMapper;
 import com.pyr.permission.domain.role.model.SysAclModule;
 import com.pyr.permission.domain.role.param.SysAclModuleParam;
-import com.pyr.permission.domain.user.model.SysUser;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -112,7 +111,7 @@ public class SysAclModuleService {
     }
 
     private SysAclModule buildSysAclModule(SysAclModuleParam param) {
-        SysAclModule sysAclModule = (SysAclModule) SysBeanUtil.convert(param, SysUser.class);
+        SysAclModule sysAclModule = (SysAclModule) SysBeanUtil.convert(param, SysAclModule.class);
         String parentLevel = getLevel(param.getParentId());
         sysAclModule.setLevel(LevelUtil.calculateLevel(parentLevel, param.getParentId()));
         return sysAclModule;

@@ -9,7 +9,6 @@ import com.pyr.permission.common.util.SysBeanUtil;
 import com.pyr.permission.domain.role.mapper.SysAclMapper;
 import com.pyr.permission.domain.role.model.SysAcl;
 import com.pyr.permission.domain.role.param.SysAclParam;
-import com.pyr.permission.domain.user.model.SysUser;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,7 +28,7 @@ public class SysAclService {
 
     public SysAcl insert(SysAclParam param) {
         validateParam(param);
-        SysAcl SysAcl = (SysAcl) SysBeanUtil.convert(param, SysUser.class);
+        SysAcl SysAcl = (SysAcl) SysBeanUtil.convert(param, SysAcl.class);
         sysAclMapper.insertSelective(SysAcl);
         return SysAcl;
     }
@@ -38,7 +37,7 @@ public class SysAclService {
         validateParam(param);
         SysAcl before = sysAclMapper.selectByPrimaryKey(param.getId());
         Preconditions.checkNotNull(before, "待更新的权限点不存在");
-        SysAcl after = (SysAcl) SysBeanUtil.convert(param, SysUser.class);
+        SysAcl after = (SysAcl) SysBeanUtil.convert(param, SysAcl.class);
         return sysAclMapper.updateByPrimaryKeySelective(after) > 0;
     }
 
