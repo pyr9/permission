@@ -1,7 +1,6 @@
 package com.pyr.permission.interfaces;
 
 import com.pyr.permission.common.ResultBody;
-import com.pyr.permission.domain.department.service.SysTreeService;
 import com.pyr.permission.domain.role.param.SysAclModuleParam;
 import com.pyr.permission.domain.role.service.SysAclModuleService;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +22,6 @@ public class SysAclModuleController {
     @Resource
     private SysAclModuleService sysAclModuleService;
 
-    @Resource
-    private SysTreeService sysTreeService;
 
     @GetMapping("/tree")
     public ResultBody aclModuleTree() {
@@ -51,12 +48,5 @@ public class SysAclModuleController {
     public ResultBody queryById(@PathVariable("id") Integer id) {
         return ResultBody.success(sysAclModuleService.queryById(id));
     }
-
-    @RequestMapping("/roleTree")
-    @ResponseBody
-    public ResultBody roleTree(@RequestParam("roleId") int roleId) {
-        return ResultBody.success(sysTreeService.roleTree(roleId));
-    }
-
 }
 
