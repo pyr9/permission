@@ -12,11 +12,11 @@ import java.util.Date;
 @Getter
 @Setter
 public class BaseEntity {
-    @TableId(type = IdType.ASSIGN_UUID)
-    private Integer id;
+    @TableId(type = IdType.ASSIGN_ID)
+    private Long id;
 
     @TableField(fill = FieldFill.INSERT)
-    private Integer creatorId;
+    private Long creatorId;
 
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;

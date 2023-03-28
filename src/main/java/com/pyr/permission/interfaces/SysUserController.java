@@ -47,7 +47,7 @@ public class SysUserController {
 
     @RequestMapping("/pageUsers")
     @ResponseBody
-    public ResultBody page(@RequestParam("departmentId") int deptId, PageQuery pageQuery) {
+    public ResultBody page(@RequestParam("departmentId") Long deptId, PageQuery pageQuery) {
         PageResult<SysUser> result = sysUserService.pageByDepartmentId(deptId, pageQuery);
         return ResultBody.success(result);
     }
@@ -55,7 +55,7 @@ public class SysUserController {
     @RequestMapping("/users")
     @ResponseBody
     public ResultBody allUsers() {
-        List<SysUser> users = sysUserService.getAllUser();
+        List<SysUser> users = sysUserService.getAll();
         return ResultBody.success(users);
     }
 }

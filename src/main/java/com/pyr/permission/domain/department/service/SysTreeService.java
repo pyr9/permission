@@ -70,7 +70,7 @@ public class SysTreeService {
      */
     public List<AclModuleLevelDto> roleTree(int roleId) {
         List<SysAcl> allAcl = sysAclMapper.getAll();
-        List<Integer> aclIdsByRole = sysCoreService.getRoleAclList(roleId).stream().map(SysAcl::getId).collect(Collectors.toList());
+        List<Long> aclIdsByRole = sysCoreService.getRoleAclList(roleId).stream().map(SysAcl::getId).collect(Collectors.toList());
         val aclDtoList = allAcl.stream().map(acl -> {
             AclDto aclDto = (AclDto) SysBeanUtil.convert(acl, AclDto.class);
             if (aclIdsByRole.contains(acl.getId())) {
@@ -162,7 +162,7 @@ public class SysTreeService {
         }
         List<AclModuleLevelDto> aclModuleLevelList = aclModuleTree();
 
-        Multimap<Integer, AclDto> moduleIdAclMap = ArrayListMultimap.create();
+        Multimap<Long, AclDto> moduleIdAclMap = ArrayListMultimap.create();
         for (AclDto acl : aclDtoList) {
             if (acl.getStatus() == 1) {
                 moduleIdAclMap.put(acl.getAclModuleId(), acl);
@@ -172,7 +172,7 @@ public class SysTreeService {
         return aclModuleLevelList;
     }
 
-    private void bindAclsWithOrder(List<AclModuleLevelDto> aclModuleLevelList, Multimap<Integer, AclDto> moduleIdAclMap) {
+    private void bindAclsWithOrder(List<AclModuleLevelDto> aclModuleLevelList, Multimap<Long, AclDto> moduleIdAclMap) {
         if (CollectionUtils.isEmpty(aclModuleLevelList)) {
             return;
         }

@@ -14,7 +14,7 @@ class SysBeanUtilTest {
         userParam.setMail("1@qq.com");
         SysUser user = (SysUser) SysBeanUtil.convert(userParam, SysUser.class);
         System.out.println(user.getId());
-        System.out.println(user.getUsername());
+        System.out.println(user.getUserName());
         System.out.println(user.getMail());
     }
 }

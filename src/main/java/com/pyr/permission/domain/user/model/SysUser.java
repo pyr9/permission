@@ -10,7 +10,7 @@ import lombok.*;
 @Data
 public class SysUser extends BaseEntity {
 
-    private String username;
+    private String userName;
 
     private String telephone;
 
@@ -24,7 +24,7 @@ public class SysUser extends BaseEntity {
 
     public static SysUser of(String userName, String telephone, String mail, String password, Integer departmentId, Integer status) {
         return SysUser.builder()
-                .username(userName)
+                .userName(userName)
                 .telephone(telephone)
                 .mail(mail)
                 .password(password)

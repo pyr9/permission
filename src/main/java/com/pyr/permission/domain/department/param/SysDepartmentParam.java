@@ -20,7 +20,7 @@ public class SysDepartmentParam {
     private String name;
 
     // 避免后续接口空指针异常
-    private Integer parentId = 0;
+    private Long parentId = 0L;
 
     @NotNull(message = "展示顺序不可以为空")
     private Integer seq;

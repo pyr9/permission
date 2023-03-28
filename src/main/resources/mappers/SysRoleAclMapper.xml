@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pyr.permission.domain.role.mapper.SysRoleAclMapper">
     <resultMap id="BaseResultMap" type="com.pyr.permission.domain.role.model.SysRoleAcl">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="role_id" jdbcType="INTEGER" property="roleId"/>
-        <result column="acl_id" jdbcType="INTEGER" property="aclId"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="role_id" jdbcType="BIGINT" property="roleId"/>
+        <result column="acl_id" jdbcType="BIGINT" property="aclId"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
-        <result column="creator_id" jdbcType="INTEGER" property="creatorId"/>
+        <result column="creator_id" jdbcType="BIGINT" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
@@ -78,6 +78,12 @@
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
             <if test="creatorIp != null">
                 #{creatorIp,jdbcType=VARCHAR},
             </if>
@@ -100,6 +106,7 @@
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="creatorIp != null">
                 creatorIp = #{creatorIp,jdbcType=VARCHAR},
@@ -114,6 +121,7 @@
             remark      = #{remark,jdbcType=VARCHAR},
             creator_id  = #{creatorId,jdbcType=INTEGER},
             create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
             creatorIp   = #{creatorIp,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>

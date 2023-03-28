@@ -40,12 +40,12 @@ public class SysAclModuleController {
     }
 
     @DeleteMapping
-    public ResultBody deleteById(Integer id) {
+    public ResultBody deleteById(Long id) {
         return ResultBody.success(sysAclModuleService.deleteById(id));
     }
 
     @GetMapping("{id}")
-    public ResultBody queryById(@PathVariable("id") Integer id) {
+    public ResultBody queryById(@PathVariable("id") Long id) {
         return ResultBody.success(sysAclModuleService.queryById(id));
     }
 }

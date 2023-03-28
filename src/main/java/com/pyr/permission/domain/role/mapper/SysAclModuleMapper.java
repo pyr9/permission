@@ -1,11 +1,12 @@
 package com.pyr.permission.domain.role.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.pyr.permission.domain.role.model.SysAclModule;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface SysAclModuleMapper {
+public interface SysAclModuleMapper extends BaseMapper<SysAclModule> {
     int deleteByPrimaryKey(Integer id);
 
     int insert(SysAclModule record);
@@ -18,7 +19,7 @@ public interface SysAclModuleMapper {
 
     int updateByPrimaryKey(SysAclModule record);
 
-    int countByNameAndParentId(@Param("parentId") Integer parentId, @Param("name") String name, @Param("id") Integer id);
+    int countByNameAndParentId(@Param("parentId") Long parentId, @Param("name") String name, @Param("id") Integer id);
 
     List<SysAclModule> getChildDeptListByLevel(String s);
 
@@ -27,5 +28,5 @@ public interface SysAclModuleMapper {
 
     List<SysAclModule> getAllAclModule();
 
-    int countByParentId(@Param("aclModuleId") int aclModuleId);
+    int countByParentId(@Param("aclModuleId") Long aclModuleId);
 }

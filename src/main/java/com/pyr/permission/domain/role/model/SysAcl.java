@@ -11,7 +11,7 @@ public class SysAcl extends BaseEntity {
 
     private String name;
 
-    private Integer aclModuleId;
+    private Long aclModuleId;
 
     private String url;
 

@@ -20,7 +20,7 @@ public class SysAclModuleParam {
     private String name;
 
 
-    private Integer parentId = 0;
+    private Long parentId = 0L;
 
     @NotNull(message = "状态")
     private Integer status;

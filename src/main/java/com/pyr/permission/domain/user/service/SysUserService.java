@@ -68,10 +68,10 @@ public class SysUserService {
     }
 
     public SysUser findById(Integer userId) {
-        return sysUserMapper.selectByPrimaryKey(userId);
+        return sysUserMapper.selectById(userId);
     }
 
-    public PageResult<SysUser> pageByDepartmentId(int deptId, PageQuery pageQuery) {
+    public PageResult<SysUser> pageByDepartmentId(Long deptId, PageQuery pageQuery) {
         BeanValidator.check(pageQuery);
         int count = sysUserMapper.countByDepartmentId(deptId);
         if (count > 0) {
@@ -81,7 +81,7 @@ public class SysUserService {
         return PageResult.<SysUser>builder().build();
     }
 
-    public List<SysUser> getAllUser() {
+    public List<SysUser> getAll() {
         return sysUserMapper.getAll();
     }
 }

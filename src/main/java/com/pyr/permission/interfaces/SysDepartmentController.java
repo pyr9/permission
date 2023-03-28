@@ -46,7 +46,7 @@ public class SysDepartmentController {
 
     @RequestMapping("/delete")
     @ResponseBody
-    public ResultBody delete(@RequestParam("id") int id) {
+    public ResultBody delete(@RequestParam("id") Long id) {
         sysDepartmentService.delete(id);
         return ResultBody.success();
     }

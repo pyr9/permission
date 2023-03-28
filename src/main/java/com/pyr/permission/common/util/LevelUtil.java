@@ -13,7 +13,7 @@ public class LevelUtil {
     // 0.1.2
     // 0.1.3
     // 0.4
-    public static String calculateLevel(String parentLevel, int parentId) {
+    public static String calculateLevel(String parentLevel, Long parentId) {
         if (StringUtils.isBlank(parentLevel)) {
             return ROOT;
         } else {

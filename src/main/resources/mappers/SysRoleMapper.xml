@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pyr.permission.domain.role.mapper.SysRoleMapper">
     <resultMap id="BaseResultMap" type="com.pyr.permission.domain.role.model.SysRole">
-        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
-        <result column="creator_id" jdbcType="INTEGER" property="creatorId"/>
+        <result column="creator_id" jdbcType="BIGINT" property="creatorId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-
         <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , name, type, status, remark, creator_id, update_time,update_time,creatorIp
+        , name, type, status, remark, creator_id, create_time,update_time,creatorIp
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -22,112 +22,6 @@
         from sys_role
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete
-        from sys_role
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" parameterType="com.pyr.permission.domain.role.model.SysRole">
-        insert into sys_role (id, name, type,
-                              status, remark, creator_id,
-                              update_time, update_time, creatorIp)
-        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
-                #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR},
-                #{createTime,jdbcType=TIMESTAMP}, #{creatorIp,jdbcType=VARCHAR})
-    </insert>
-    <insert id="insertSelective" parameterType="com.pyr.permission.domain.role.model.SysRole">
-        insert into sys_role
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="name != null">
-                name,
-            </if>
-            <if test="type != null">
-                type,
-            </if>
-            <if test="status != null">
-                status,
-            </if>
-            <if test="remark != null">
-                remark,
-            </if>
-            <if test="creatorId != null">
-                creator_id,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="creatorIp != null">
-                creatorIp,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="name != null">
-                #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="type != null">
-                #{type,jdbcType=INTEGER},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=INTEGER},
-            </if>
-            <if test="remark != null">
-                #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="creatorId != null">
-                #{creator,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="creatorIp != null">
-                #{creatorIp,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.pyr.permission.domain.role.model.SysRole">
-        update sys_role
-        <set>
-            <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="type != null">
-                type = #{type,jdbcType=INTEGER},
-            </if>
-            <if test="status != null">
-                status = #{status,jdbcType=INTEGER},
-            </if>
-            <if test="remark != null">
-                remark = #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="creatorId != null">
-                creator_id = #{creatorId,jdbcType=INTEGER},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="creatorIp != null">
-                creatorIp = #{creatorIp,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.pyr.permission.domain.role.model.SysRole">
-        update sys_role
-        set name        = #{name,jdbcType=VARCHAR},
-            type        = #{type,jdbcType=INTEGER},
-            status      = #{status,jdbcType=INTEGER},
-            remark      = #{remark,jdbcType=VARCHAR},
-            creator_id  = #{creatorId,jdbcType=INTEGER},
-            create_time = #{createTime,jdbcType=TIMESTAMP},
-            creatorIp   = #{creatorIp,jdbcType=VARCHAR}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
     <select id="getAll" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>

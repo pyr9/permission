@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pyr.permission.domain.department.mapper.SysDepartmentMapper">
     <resultMap id="BaseResultMap" type="com.pyr.permission.domain.department.model.SysDepartment">
-        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
         <result column="level" jdbcType="VARCHAR" property="level"/>
         <result column="seq" jdbcType="INTEGER" property="seq"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
-        <result column="creator_id" jdbcType="INTEGER" property="creatorId"/>
+        <result column="creator_id" jdbcType="BIGINT" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
@@ -31,7 +31,7 @@
     <insert id="insert" parameterType="com.pyr.permission.domain.department.model.SysDepartment">
         insert into sys_department (id, name, parent_id,
                                     level, seq, remark,
-                                    creator_id, update_time, update_time, creatorIp)
+                                    creator_id, create_time, update_time, creatorIp)
         values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER},
                 #{level,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
                 #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creatorIp,jdbcType=VARCHAR})
@@ -92,6 +92,9 @@
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
             <if test="creatorIp != null">
                 #{creatorIp,jdbcType=VARCHAR},
             </if>
@@ -120,6 +123,7 @@
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="creatorIp != null">
                 creatorIp = #{creatorIp,jdbcType=VARCHAR},
@@ -136,6 +140,7 @@
             remark      = #{remark,jdbcType=VARCHAR},
             creator_id  = #{creatorId,jdbcType=INTEGER},
             create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
             creatorIp   = #{creatorIp,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>

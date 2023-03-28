@@ -5,12 +5,14 @@ import com.google.common.collect.Sets;
 import com.pyr.permission.domain.role.mapper.SysRoleAclMapper;
 import com.pyr.permission.domain.role.model.SysRoleAcl;
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class SysRoleAclService {
     @Resource
     private SysRoleAclMapper sysRoleAclMapper;

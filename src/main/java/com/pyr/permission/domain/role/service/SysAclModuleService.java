@@ -29,8 +29,8 @@ public class SysAclModuleService {
     @Autowired
     private SysTreeService sysTreeService;
 
-    public SysAclModule queryById(Integer id) {
-        return this.sysAclModuleMapper.selectByPrimaryKey(id);
+    public SysAclModule queryById(Long id) {
+        return this.sysAclModuleMapper.selectById(id);
     }
 
 
@@ -78,17 +78,17 @@ public class SysAclModuleService {
         return this.queryById(after.getId());
     }
 
-    public boolean deleteById(Integer id) {
-        SysAclModule aclModule = sysAclModuleMapper.selectByPrimaryKey(id);
+    public boolean deleteById(Long id) {
+        SysAclModule aclModule = sysAclModuleMapper.selectById(id);
         Preconditions.checkNotNull(aclModule, "待删除的权限模块不存在，无法删除");
         if (sysAclModuleMapper.countByParentId(aclModule.getId()) > 0) {
             throw new ParamException("当前模块下面有子模块，无法删除");
         }
-        return this.sysAclModuleMapper.deleteByPrimaryKey(id) > 0;
+        return this.sysAclModuleMapper.deleteById(id) > 0;
     }
 
-    private String getLevel(Integer departmentId) {
-        SysAclModule sysAclModule = sysAclModuleMapper.selectByPrimaryKey(departmentId);
+    private String getLevel(Long departmentId) {
+        SysAclModule sysAclModule = sysAclModuleMapper.selectById(departmentId);
         if (sysAclModule == null) {
             return null;
         }
@@ -106,7 +106,7 @@ public class SysAclModuleService {
         }
     }
 
-    private boolean checkExist(Integer parentId, String deptName, Integer deptId) {
+    private boolean checkExist(Long parentId, String deptName, Integer deptId) {
         return sysAclModuleMapper.countByNameAndParentId(parentId, deptName, deptId) > 0;
     }
 

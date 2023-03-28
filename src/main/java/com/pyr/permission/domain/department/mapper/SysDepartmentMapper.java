@@ -1,12 +1,13 @@
 package com.pyr.permission.domain.department.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.pyr.permission.domain.department.model.SysDepartment;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface SysDepartmentMapper {
-    int countByNameAndParentId(@Param("parentId") Integer parentId, @Param("name") String name, @Param("id") Integer id);
+public interface SysDepartmentMapper extends BaseMapper<SysDepartment> {
+    int countByNameAndParentId(@Param("parentId") Long parentId, @Param("name") String name, @Param("id") Integer id);
 
     List<SysDepartment> getAllDept();
 
@@ -26,5 +27,5 @@ public interface SysDepartmentMapper {
 
     void batchUpdateLevel(@Param("sysDeptList") List<SysDepartment> sysDeptList);
 
-    int countByParentId(@Param("parentId") Integer parentId);
+    int countByParentId(@Param("parentId") Long parentId);
 }

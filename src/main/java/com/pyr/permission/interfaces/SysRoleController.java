@@ -5,6 +5,7 @@ import com.pyr.permission.domain.department.service.SysTreeService;
 import com.pyr.permission.domain.role.param.SysRoleParam;
 import com.pyr.permission.domain.role.service.SysRoleAclService;
 import com.pyr.permission.domain.role.service.SysRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,10 @@ public class SysRoleController {
     @Resource
     private SysRoleService sysRoleService;
 
-    @Resource
+    @Autowired
     private SysTreeService sysTreeService;
 
-    @Resource
+    @Autowired
     private SysRoleAclService sysRoleAclService;
 
     @RequestMapping("/add")

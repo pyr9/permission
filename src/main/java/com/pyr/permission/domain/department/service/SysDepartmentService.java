@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
@@ -27,7 +26,7 @@ public class SysDepartmentService {
     @Autowired
     private SysDepartmentMapper sysDepartmentMapper;
 
-    @Resource
+    @Autowired
     private SysUserMapper sysUserMapper;
 
     public void save(SysDepartmentParam param) {
@@ -57,12 +56,12 @@ public class SysDepartmentService {
         return sysTreeService.deptTree();
     }
 
-    private boolean checkExist(Integer parentId, String deptName, Integer deptId) {
+    private boolean checkExist(Long parentId, String deptName, Integer deptId) {
         return sysDepartmentMapper.countByNameAndParentId(parentId, deptName, deptId) > 0;
     }
 
-    private String getLevel(Integer departmentId) {
-        SysDepartment sysDepartment = sysDepartmentMapper.selectByPrimaryKey(departmentId);
+    private String getLevel(Long departmentId) {
+        SysDepartment sysDepartment = sysDepartmentMapper.selectById(departmentId);
         if (sysDepartment == null) {
             return null;
         }
@@ -98,8 +97,8 @@ public class SysDepartmentService {
         }
     }
 
-    public void delete(int id) {
-        SysDepartment dept = sysDepartmentMapper.selectByPrimaryKey(id);
+    public void delete(Long id) {
+        SysDepartment dept = sysDepartmentMapper.selectById(id);
         Preconditions.checkNotNull(dept, "待删除的部门不存在，无法删除");
         if (sysDepartmentMapper.countByParentId(dept.getId()) > 0) {
             throw new ParamException("当前部门下面有子部门，无法删除");
@@ -107,6 +106,6 @@ public class SysDepartmentService {
         if (sysUserMapper.countByDepartmentId(dept.getId()) > 0) {
             throw new ParamException("当前部门下面有用户，无法删除");
         }
-        sysDepartmentMapper.deleteByPrimaryKey(id);
+        sysDepartmentMapper.deleteById(id);
     }
 }
