@@ -12,11 +12,10 @@ import javax.validation.constraints.NotNull;
 @Setter
 @ToString
 public class SysAclModuleParam {
-    private Integer id;
+    private Long id;
 
     @NotBlank(message = "权限模块名称不可以为空")
     @Length(max = 15, min = 2, message = "权限模块名称长度需要在2-15个字之间")
-
     private String name;
 
 
