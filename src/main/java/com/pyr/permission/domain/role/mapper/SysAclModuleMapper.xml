@@ -12,151 +12,12 @@
         <result column="creator_id" jdbcType="BIGINT" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
+        <result column="creator_ip" jdbcType="VARCHAR" property="creatorIp"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , name, parent_id, level, status, seq, remark, creator_id, update_time,update_time,creatorIp
+        , name, parent_id, level, status, seq, remark, creator_id, update_time,update_time,creator_ip
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from sys_acl_module
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete
-        from sys_acl_module
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" parameterType="com.pyr.permission.domain.role.model.SysAclModule">
-        insert into sys_acl_module (id, name, parent_id,
-                                    level, status, seq,
-                                    remark, creator_id, create_time,
-                                    creatorIp)
-        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER},
-                #{level,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER},
-                #{remark,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-                #{creatorIp,jdbcType=VARCHAR})
-    </insert>
-    <insert id="insertSelective" parameterType="com.pyr.permission.domain.role.model.SysAclModule">
-        insert into sys_acl_module
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="name != null">
-                name,
-            </if>
-            <if test="parentId != null">
-                parent_id,
-            </if>
-            <if test="level != null">
-                level,
-            </if>
-            <if test="status != null">
-                status,
-            </if>
-            <if test="seq != null">
-                seq,
-            </if>
-            <if test="remark != null">
-                remark,
-            </if>
-            <if test="creatorId != null">
-                creator_id,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="creatorIp != null">
-                creatorIp,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="name != null">
-                #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="parentId != null">
-                #{parentId,jdbcType=INTEGER},
-            </if>
-            <if test="level != null">
-                #{level,jdbcType=VARCHAR},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=INTEGER},
-            </if>
-            <if test="seq != null">
-                #{seq,jdbcType=INTEGER},
-            </if>
-            <if test="remark != null">
-                #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="creatorId != null">
-                #{creator,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="creatorIp != null">
-                #{creatorIp,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.pyr.permission.domain.role.model.SysAclModule">
-        update sys_acl_module
-        <set>
-            <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="parentId != null">
-                parent_id = #{parentId,jdbcType=INTEGER},
-            </if>
-            <if test="level != null">
-                level = #{level,jdbcType=VARCHAR},
-            </if>
-            <if test="status != null">
-                status = #{status,jdbcType=INTEGER},
-            </if>
-            <if test="seq != null">
-                seq = #{seq,jdbcType=INTEGER},
-            </if>
-            <if test="remark != null">
-                remark = #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="creatorId != null">
-                creator_id = #{creatorId,jdbcType=INTEGER},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="creatorIp != null">
-                creatorIp = #{creatorIp,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.pyr.permission.domain.role.model.SysAclModule">
-        update sys_acl_module
-        set name        = #{name,jdbcType=VARCHAR},
-            parent_id   = #{parentId,jdbcType=INTEGER},
-            level       = #{level,jdbcType=VARCHAR},
-            status      = #{status,jdbcType=INTEGER},
-            seq         = #{seq,jdbcType=INTEGER},
-            remark      = #{remark,jdbcType=VARCHAR},
-            creator_id  = #{creatorId,jdbcType=INTEGER},
-            create_time = #{createTime,jdbcType=TIMESTAMP},
-            update_time = #{updateTime,jdbcType=TIMESTAMP},
-            creatorIp   = #{creatorIp,jdbcType=VARCHAR}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
     <select id="countByNameAndParentId" parameterType="map" resultType="int">
         SELECT count(1)
         FROM sys_acl_module
@@ -168,4 +29,27 @@
             AND id != #{id}
         </if>
     </select>
+    <select id="getAllAclModule" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_acl_module
+    </select>
+    <select id="countByParentId" parameterType="long" resultType="int">
+        SELECT count(1)
+        FROM sys_acl_module
+        WHERE parent_id = #{aclModuleId}
+    </select>
+    <select id="getChildAclModuleListByLevel" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_acl_module
+        WHERE level like #{level}
+    </select>
+    <update id="batchUpdateLevel" parameterType="map">
+        <foreach collection="sysAclModuleList" item="sysAclModule" separator=";">
+            UPDATE sys_acl_module
+            SET level = #{sysAclModule.level}
+            WHERE id = #{sysAclModule.id}
+        </foreach>
+    </update>
 </mapper>

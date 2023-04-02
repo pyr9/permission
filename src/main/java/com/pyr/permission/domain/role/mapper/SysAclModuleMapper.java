@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface SysAclModuleMapper extends BaseMapper<SysAclModule> {
 
-    int countByNameAndParentId(@Param("parentId") Long parentId, @Param("name") String name, @Param("id") Integer id);
+    int countByNameAndParentId(@Param("parentId") Long parentId, @Param("name") String name, @Param("id") Long id);
 
-    List<SysAclModule> getChildDeptListByLevel(String s);
+    List<SysAclModule> getChildAclModuleListByLevel(String s);
 
 
     void batchUpdateLevel(@Param("sysAclModuleList") List<SysAclModule> sysAclModuleList);

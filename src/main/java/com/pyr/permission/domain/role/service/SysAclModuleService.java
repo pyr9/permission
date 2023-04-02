@@ -60,7 +60,7 @@ public class SysAclModuleService {
         String oldLevelPrefix = before.getLevel();
         if (!after.getLevel().equals(before.getLevel())) {
             String curLevel = before.getLevel() + "." + before.getId();
-            List<SysAclModule> deptList = sysAclModuleMapper.getChildDeptListByLevel(curLevel + "%");
+            List<SysAclModule> deptList = sysAclModuleMapper.getChildAclModuleListByLevel(curLevel + "%");
             if (CollectionUtils.isNotEmpty(deptList)) {
                 for (SysAclModule dept : deptList) {
                     String level = dept.getLevel();
@@ -106,7 +106,7 @@ public class SysAclModuleService {
         }
     }
 
-    private boolean checkExist(Long parentId, String deptName, Integer deptId) {
+    private boolean checkExist(Long parentId, String deptName, Long deptId) {
         return sysAclModuleMapper.countByNameAndParentId(parentId, deptName, deptId) > 0;
     }
 
