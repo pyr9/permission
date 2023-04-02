@@ -10,11 +10,11 @@
         <result column="creator_id" jdbcType="BIGINT" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
+        <result column="creator_ip" jdbcType="VARCHAR" property="creatorIp"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , name, type, status, remark, creator_id, create_time,update_time,creatorIp
+        , name, type, status, remark, creator_id, create_time,update_time,creator_ip
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -22,15 +22,18 @@
         from sys_role
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <select id="getAll" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM sys_role
-    </select>
-
     <select id="countByName" parameterType="string" resultType="int">
         SELECT count(1)
         FROM sys_role
         WHERE name = #{name}
+    </select>
+    <select id="getByIdList" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_role
+        WHERE id IN
+        <foreach collection="idList" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
     </select>
 </mapper>

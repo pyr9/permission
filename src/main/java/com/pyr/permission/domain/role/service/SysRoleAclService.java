@@ -17,11 +17,11 @@ public class SysRoleAclService {
     @Resource
     private SysRoleAclMapper sysRoleAclMapper;
 
-    public void changeRoleAcls(Integer roleId, List<Integer> aclIdList) {
-        List<Integer> originAclIdList = sysRoleAclMapper.getAclIdListByRoleIdList(Lists.newArrayList(roleId));
+    public void changeRoleAcls(Long roleId, List<Long> aclIdList) {
+        List<Long> originAclIdList = sysRoleAclMapper.getAclIdListByRoleIdList(Lists.newArrayList(roleId));
         if (originAclIdList.size() == aclIdList.size()) {
-            Set<Integer> originAclIdSet = Sets.newHashSet(originAclIdList);
-            Set<Integer> aclIdSet = Sets.newHashSet(aclIdList);
+            Set<Long> originAclIdSet = Sets.newHashSet(originAclIdList);
+            Set<Long> aclIdSet = Sets.newHashSet(aclIdList);
             originAclIdSet.removeAll(aclIdSet);
             if (CollectionUtils.isEmpty(originAclIdSet)) {
                 return;
@@ -31,13 +31,13 @@ public class SysRoleAclService {
     }
 
     @Transactional
-    public void updateRoleAcls(int roleId, List<Integer> aclIdList) {
+    public void updateRoleAcls(Long roleId, List<Long> aclIdList) {
         sysRoleAclMapper.deleteByRoleId(roleId);
         if (CollectionUtils.isEmpty(aclIdList)) {
             return;
         }
         List<SysRoleAcl> roleAclList = Lists.newArrayList();
-        for (Integer aclId : aclIdList) {
+        for (Long aclId : aclIdList) {
             SysRoleAcl roleAcl = SysRoleAcl.builder().roleId(roleId).aclId(aclId).build();
             roleAclList.add(roleAcl);
         }

@@ -9,11 +9,11 @@
         <result column="creator_id" jdbcType="BIGINT" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
+        <result column="creator_ip" jdbcType="VARCHAR" property="creatorIp"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , role_id, acl_id, remark, creator_id, update_time,update_time,creatorIp
+        , role_id, acl_id, remark, creator_id, update_time,update_time,creator_ip
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -125,7 +125,7 @@
             creatorIp   = #{creatorIp,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <select id="getAclIdListByRoleIdList" parameterType="map" resultType="int">
+    <select id="getAclIdListByRoleIdList" parameterType="map" resultType="long">
         SELECT acl_id
         FROM sys_role_acl
         WHERE role_id in
@@ -134,7 +134,7 @@
         </foreach>
     </select>
 
-    <delete id="deleteByRoleId" parameterType="int">
+    <delete id="deleteByRoleId" parameterType="long">
         DELETE
         FROM sys_role_acl
         WHERE role_id = #{roleId}
@@ -147,4 +147,9 @@
             (#{roleAcl.roleId}, #{roleAcl.aclId}, #{roleAcl.operator}, #{roleAcl.operateTime}, #{roleAcl.operateIp})
         </foreach>
     </insert>
+    <select id="getRoleIdListByAclId" parameterType="long" resultType="long">
+        SELECT role_id
+        FROM sys_role_acl
+        WHERE acl_id = #{aclId}
+    </select>
 </mapper>

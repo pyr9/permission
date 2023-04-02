@@ -33,5 +33,5 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 
     List<SysUser> getAll();
 
-    List<SysUser> getByIdList(List<Integer> userIdList);
+    List<SysUser> getByIdList(List<Long> userIdList);
 }
