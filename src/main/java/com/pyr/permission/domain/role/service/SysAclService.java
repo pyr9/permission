@@ -12,6 +12,8 @@ import com.pyr.permission.domain.role.param.SysAclParam;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +31,7 @@ public class SysAclService {
     public SysAcl insert(SysAclParam param) {
         validateParam(param);
         SysAcl SysAcl = (SysAcl) SysBeanUtil.convert(param, SysAcl.class);
+        SysAcl.setCode(generateCode());
         sysAclMapper.insert(SysAcl);
         return SysAcl;
     }
@@ -41,7 +44,7 @@ public class SysAclService {
         return sysAclMapper.updateById(after) > 0;
     }
 
-    public Object getPageByAclModuleId(Integer aclModuleId, PageQuery pageQuery) {
+    public Object getPageByAclModuleId(Long aclModuleId, PageQuery pageQuery) {
         BeanValidator.check(pageQuery);
         int count = sysAclMapper.countByAclModuleId(aclModuleId);
         if (count > 0) {
@@ -51,7 +54,7 @@ public class SysAclService {
         return PageResult.<SysAcl>builder().build();
     }
 
-    public boolean deleteById(Integer id) {
+    public boolean deleteById(Long id) {
         SysAcl aclModule = sysAclMapper.selectById(id);
         Preconditions.checkNotNull(aclModule, "待删除的权限点不存在，无法删除");
         return this.sysAclMapper.deleteById(id) > 0;
@@ -65,7 +68,13 @@ public class SysAclService {
         }
     }
 
-    private boolean checkExist(Integer aclModuleId, String name, Integer id) {
+    private boolean checkExist(Long aclModuleId, String name, Long id) {
         return sysAclMapper.countByNameAndAclModuleId(aclModuleId, name, id) > 0;
     }
+
+    private String generateCode() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        return dateFormat.format(new Date()) + "_" + (int) (Math.random() * 100);
+    }
+
 }

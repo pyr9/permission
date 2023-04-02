@@ -8,14 +8,11 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface SysAclMapper extends BaseMapper<SysAcl> {
+    int countByAclModuleId(@Param("aclModuleId") Long aclModuleId);
 
-    int insert(SysAcl record);
+    List<SysAcl> getPageByAclModuleId(@Param("aclModuleId") Long aclModuleId, @Param("page") PageQuery page);
 
-    int countByAclModuleId(@Param("aclModuleId") int aclModuleId);
-
-    List<SysAcl> getPageByAclModuleId(@Param("aclModuleId") int aclModuleId, @Param("page") PageQuery page);
-
-    int countByNameAndAclModuleId(@Param("aclModuleId") int aclModuleId, @Param("name") String name, @Param("id") Integer id);
+    int countByNameAndAclModuleId(@Param("aclModuleId") Long aclModuleId, @Param("name") String name, @Param("id") Long id);
 
     List<SysAcl> getAll();
 
