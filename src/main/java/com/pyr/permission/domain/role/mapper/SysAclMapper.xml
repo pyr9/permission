@@ -14,174 +14,13 @@
         <result column="creator_id" jdbcType="BIGINT" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
+        <result column="creator_ip" jdbcType="VARCHAR" property="creatorIp"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
         , code, name, acl_module_Id, url, type, status, seq, remark, creator_id, create_time,
-    creatorIp
+    creator_ip
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from sys_acl
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete
-        from sys_acl
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" parameterType="com.pyr.permission.domain.role.model.SysAcl">
-        insert into sys_acl (id, code, name,
-                             acl_module_Id, url, type,
-                             status, seq, remark,
-                             creator_id, create_time, update_time, creatorIp)
-        values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-                #{aclModuleId,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
-                #{status,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
-                #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creatorIp,jdbcType=VARCHAR})
-    </insert>
-    <insert id="insertSelective" parameterType="com.pyr.permission.domain.role.model.SysAcl">
-        insert into sys_acl
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="code != null">
-                code,
-            </if>
-            <if test="name != null">
-                name,
-            </if>
-            <if test="aclModuleId != null">
-                acl_module_Id,
-            </if>
-            <if test="url != null">
-                url,
-            </if>
-            <if test="type != null">
-                type,
-            </if>
-            <if test="status != null">
-                status,
-            </if>
-            <if test="seq != null">
-                seq,
-            </if>
-            <if test="remark != null">
-                remark,
-            </if>
-            <if test="creatorId != null">
-                creator_id,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="creatorIp != null">
-                creatorIp,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="code != null">
-                #{code,jdbcType=VARCHAR},
-            </if>
-            <if test="name != null">
-                #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="aclModuleId != null">
-                #{aclModuleId,jdbcType=INTEGER},
-            </if>
-            <if test="url != null">
-                #{url,jdbcType=VARCHAR},
-            </if>
-            <if test="type != null">
-                #{type,jdbcType=INTEGER},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=INTEGER},
-            </if>
-            <if test="seq != null">
-                #{seq,jdbcType=INTEGER},
-            </if>
-            <if test="remark != null">
-                #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="creatorId != null">
-                #{creator,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="creatorIp != null">
-                #{creatorIp,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.pyr.permission.domain.role.model.SysAcl">
-        update sys_acl
-        <set>
-            <if test="code != null">
-                code = #{code,jdbcType=VARCHAR},
-            </if>
-            <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="aclModuleId != null">
-                acl_module_Id = #{aclModuleId,jdbcType=INTEGER},
-            </if>
-            <if test="url != null">
-                url = #{url,jdbcType=VARCHAR},
-            </if>
-            <if test="type != null">
-                type = #{type,jdbcType=INTEGER},
-            </if>
-            <if test="status != null">
-                status = #{status,jdbcType=INTEGER},
-            </if>
-            <if test="seq != null">
-                seq = #{seq,jdbcType=INTEGER},
-            </if>
-            <if test="remark != null">
-                remark = #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="creatorId != null">
-                creator_id = #{creatorId,jdbcType=INTEGER},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="creatorIp != null">
-                creatorIp = #{creatorIp,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.pyr.permission.domain.role.model.SysAcl">
-        update sys_acl
-        set code          = #{code,jdbcType=VARCHAR},
-            name          = #{name,jdbcType=VARCHAR},
-            acl_module_Id = #{aclModuleId,jdbcType=INTEGER},
-            url           = #{url,jdbcType=VARCHAR},
-            type          = #{type,jdbcType=INTEGER},
-            status        = #{status,jdbcType=INTEGER},
-            seq           = #{seq,jdbcType=INTEGER},
-            remark        = #{remark,jdbcType=VARCHAR},
-            creator       = #{creator,jdbcType=VARCHAR},
-            create_time   = #{createTime,jdbcType=TIMESTAMP},
-            creatorIp     = #{creatorIp,jdbcType=VARCHAR}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
     <select id="countByNameAndAclModuleId" parameterType="map" resultType="int">
         SELECT count(1)
         FROM sys_acl
@@ -204,7 +43,7 @@
         FROM sys_acl
         WHERE acl_module_id = #{aclModuleId}
         ORDER BY seq ASC, name ASC
-        limit #{page.offset}, #{page.pageSize}
+        LIMIT #{page.pageSize} OFFSET #{page.offset}
     </select>
     <select id="getAll" resultMap="BaseResultMap">
         SELECT
@@ -219,5 +58,11 @@
         <foreach collection="idList" item="id" open="(" close=")" separator=",">
             #{id}
         </foreach>
+    </select>
+    <select id="getByUrl" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_acl
+        WHERE url = #{url} <!-- url is not null and url != '' and  #{url} REGEXP url-->
     </select>
 </mapper>
