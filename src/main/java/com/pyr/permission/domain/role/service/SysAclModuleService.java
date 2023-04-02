@@ -37,13 +37,13 @@ public class SysAclModuleService {
     public SysAclModule insert(SysAclModuleParam param) {
         validateParam(param);
         SysAclModule sysAclModule = buildSysAclModule(param);
-        sysAclModuleMapper.insertSelective(sysAclModule);
+        sysAclModuleMapper.insert(sysAclModule);
         return sysAclModule;
     }
 
     public SysAclModule update(SysAclModuleParam param) {
         validateParam(param);
-        SysAclModule before = sysAclModuleMapper.selectByPrimaryKey(param.getId());
+        SysAclModule before = sysAclModuleMapper.selectById(param.getId());
         Preconditions.checkNotNull(before, "待更新的权限模块不存在");
         SysAclModule after = buildSysAclModule(param);
         return updateWithChild(before, after);
@@ -74,7 +74,7 @@ public class SysAclModuleService {
                 sysAclModuleMapper.batchUpdateLevel(deptList);
             }
         }
-        sysAclModuleMapper.updateByPrimaryKey(after);
+        sysAclModuleMapper.updateById(after);
         return this.queryById(after.getId());
     }
 

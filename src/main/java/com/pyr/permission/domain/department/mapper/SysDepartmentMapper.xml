@@ -11,11 +11,11 @@
         <result column="creator_id" jdbcType="BIGINT" property="creatorId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="creatorIp" jdbcType="VARCHAR" property="creatorIp"/>
+        <result column="creator_ip" jdbcType="VARCHAR" property="creatorIp"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , name, parent_id, level, seq, remark, creator_id, update_time,update_time,creatorIp
+        , name, parent_id, level, seq, remark, creator_id, update_time,update_time,creator_ip
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select

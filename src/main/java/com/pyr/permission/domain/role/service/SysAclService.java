@@ -29,16 +29,16 @@ public class SysAclService {
     public SysAcl insert(SysAclParam param) {
         validateParam(param);
         SysAcl SysAcl = (SysAcl) SysBeanUtil.convert(param, SysAcl.class);
-        sysAclMapper.insertSelective(SysAcl);
+        sysAclMapper.insert(SysAcl);
         return SysAcl;
     }
 
     public boolean update(SysAclParam param) {
         validateParam(param);
-        SysAcl before = sysAclMapper.selectByPrimaryKey(param.getId());
+        SysAcl before = sysAclMapper.selectById(param.getId());
         Preconditions.checkNotNull(before, "待更新的权限点不存在");
         SysAcl after = (SysAcl) SysBeanUtil.convert(param, SysAcl.class);
-        return sysAclMapper.updateByPrimaryKeySelective(after) > 0;
+        return sysAclMapper.updateById(after) > 0;
     }
 
     public Object getPageByAclModuleId(Integer aclModuleId, PageQuery pageQuery) {
@@ -52,9 +52,9 @@ public class SysAclService {
     }
 
     public boolean deleteById(Integer id) {
-        SysAcl aclModule = sysAclMapper.selectByPrimaryKey(id);
+        SysAcl aclModule = sysAclMapper.selectById(id);
         Preconditions.checkNotNull(aclModule, "待删除的权限点不存在，无法删除");
-        return this.sysAclMapper.deleteByPrimaryKey(id) > 0;
+        return this.sysAclMapper.deleteById(id) > 0;
     }
 
 

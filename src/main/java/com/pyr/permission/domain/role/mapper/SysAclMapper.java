@@ -1,23 +1,15 @@
 package com.pyr.permission.domain.role.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.pyr.permission.common.page.PageQuery;
 import com.pyr.permission.domain.role.model.SysAcl;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface SysAclMapper {
-    int deleteByPrimaryKey(Integer id);
+public interface SysAclMapper extends BaseMapper<SysAcl> {
 
     int insert(SysAcl record);
-
-    int insertSelective(SysAcl record);
-
-    SysAcl selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SysAcl record);
-
-    int updateByPrimaryKey(SysAcl record);
 
     int countByAclModuleId(@Param("aclModuleId") int aclModuleId);
 
@@ -27,5 +19,7 @@ public interface SysAclMapper {
 
     List<SysAcl> getAll();
 
-    List<SysAcl> getByIdList(@Param("idList") List<Integer> idList);
+    List<SysAcl> getByIdList(@Param("idList") List<Long> idList);
+
+    List<SysAcl> getByUrl(String url);
 }
