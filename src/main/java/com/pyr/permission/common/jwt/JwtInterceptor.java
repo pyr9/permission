@@ -48,7 +48,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             if (userData == null) {
                 throw new BizException("token验证失败");
             }
-            Integer userId = userData.get(USER_ID).asInt();
+            Long userId = userData.get(USER_ID).asLong();
 
             //拦截器 拿到用户信息，放到RequestHolder中
             SysUserService sysUserService = ApplicationContextHelper.popBean(SysUserService.class);
