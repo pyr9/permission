@@ -67,7 +67,7 @@ public class SysUserService {
         return sysUserMapper.findByKeyword(keyword);
     }
 
-    public SysUser findById(Integer userId) {
+    public SysUser findById(Long userId) {
         return sysUserMapper.selectById(userId);
     }
 

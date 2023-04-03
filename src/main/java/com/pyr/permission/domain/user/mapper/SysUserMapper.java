@@ -20,5 +20,5 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 
     List<SysUser> getAll();
 
-    List<SysUser> getByIdList(List<Long> userIdList);
+    List<SysUser> getByIdList(@Param("idList") List<Long> userIdList);
 }

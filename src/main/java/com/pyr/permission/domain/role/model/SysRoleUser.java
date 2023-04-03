@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @Builder
 @EqualsAndHashCode(callSuper = false)
 public class SysRoleUser extends BaseEntity {
-    private Integer userId;
+    private Long userId;
 
-    private Integer roleId;
+    private Long roleId;
 }
