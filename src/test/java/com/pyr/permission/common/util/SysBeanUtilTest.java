@@ -10,7 +10,7 @@ class SysBeanUtilTest {
     void convert() {
         UserParam userParam = new UserParam();
         userParam.setId(1);
-        userParam.setUsername("张三");
+        userParam.setUserName("张三");
         userParam.setMail("1@qq.com");
         SysUser user = (SysUser) SysBeanUtil.convert(userParam, SysUser.class);
         System.out.println(user.getId());

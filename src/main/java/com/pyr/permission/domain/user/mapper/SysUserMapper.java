@@ -14,19 +14,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 
     SysUser findByKeyword(@Param("keyword") String keyword);
 
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(SysUser record);
-
-    int insertSelective(SysUser record);
-
-    SysUser selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SysUser record);
-
-    int updateByPrimaryKey(SysUser record);
-
     int countByDepartmentId(@Param("deptId") Long deptId);
 
     List<SysUser> pageByDepartmentId(@Param("deptId") Long deptId, @Param("page") PageQuery pageQuery);

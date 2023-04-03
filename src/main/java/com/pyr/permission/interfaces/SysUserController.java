@@ -9,6 +9,7 @@ import com.pyr.permission.domain.user.model.SysUser;
 import com.pyr.permission.domain.user.param.UserParam;
 import com.pyr.permission.domain.user.service.SysUserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,14 +27,14 @@ public class SysUserController {
 
     @RequestMapping("/save")
     @ResponseBody
-    public ResultBody saveUser(UserParam param) {
+    public ResultBody saveUser(@RequestBody UserParam param) {
         sysUserService.save(param);
         return ResultBody.success();
     }
 
     @RequestMapping("/update")
     @ResponseBody
-    public ResultBody updateUser(UserParam param) {
+    public ResultBody updateUser(@RequestBody UserParam param) {
         sysUserService.update(param);
         return ResultBody.success();
     }

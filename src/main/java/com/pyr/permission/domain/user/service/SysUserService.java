@@ -30,16 +30,16 @@ public class SysUserService {
         SysUser user = (SysUser) SysBeanUtil.convert(param, SysUser.class);
         user.setPassword(MD5Util.encrypt(password));
         // TODO: sendEmail
-        sysUserMapper.insertSelective(user);
+        sysUserMapper.insert(user);
     }
 
     public void update(UserParam param) {
         BeanValidator.check(param);
         validateParam(param);
-        SysUser before = sysUserMapper.selectByPrimaryKey(param.getId());
+        SysUser before = sysUserMapper.selectById(param.getId());
         Preconditions.checkNotNull(before, "待更新的用户不存在");
         SysUser after = (SysUser) SysBeanUtil.convert(param, SysUser.class);
-        sysUserMapper.updateByPrimaryKeySelective(after);
+        sysUserMapper.updateById(after);
     }
 
     private boolean checkEmailExist(String mail, Integer userId) {
