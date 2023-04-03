@@ -3,7 +3,7 @@
 <mapper namespace="com.pyr.permission.domain.user.mapper.SysUserMapper">
     <resultMap id="BaseResultMap" type="com.pyr.permission.domain.user.model.SysUser">
         <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="user_name" jdbcType="VARCHAR" property="username"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
         <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
         <result column="mail" jdbcType="VARCHAR" property="mail"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>

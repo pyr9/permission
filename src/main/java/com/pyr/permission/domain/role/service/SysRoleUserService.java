@@ -2,6 +2,7 @@ package com.pyr.permission.domain.role.service;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.pyr.permission.common.util.SysIdWorker;
 import com.pyr.permission.domain.role.mapper.SysRoleUserMapper;
 import com.pyr.permission.domain.role.model.SysRoleUser;
 import com.pyr.permission.domain.user.mapper.SysUserMapper;
@@ -39,7 +40,7 @@ public class SysRoleUserService {
         return sysUserMapper.getByIdList(userIdList);
     }
 
-    public void changeRoleUsers(long roleId, List<Long> userIds) {
+    public void update(long roleId, List<Long> userIds) {
         List<Long> originUserIdList = sysRoleUserMapper.getUserIdListByRoleId(roleId);
         if (userIdsNotChange(userIds, originUserIdList)) return;
         updateRoleUsers(roleId, userIds);
@@ -53,6 +54,7 @@ public class SysRoleUserService {
         List<SysRoleUser> roleUserList = Lists.newArrayList();
         for (Long userId : userIdList) {
             SysRoleUser roleUser = SysRoleUser.builder().roleId(roleId).userId(userId).build();
+            roleUser.setId(SysIdWorker.generateId());
             roleUserList.add(roleUser);
         }
         sysRoleUserMapper.batchInsert(roleUserList);
