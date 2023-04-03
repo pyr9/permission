@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @Builder
 @EqualsAndHashCode(callSuper = false)
 public class SysRoleAcl extends BaseEntity {
-    private Integer roleId;
+    private Long roleId;
 
-    private Integer aclId;
+    private Long aclId;
 }

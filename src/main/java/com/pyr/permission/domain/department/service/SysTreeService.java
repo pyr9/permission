@@ -10,12 +10,12 @@ import com.pyr.permission.domain.department.dto.AclModuleLevelDto;
 import com.pyr.permission.domain.department.dto.DepartmentLevelDto;
 import com.pyr.permission.domain.department.mapper.SysDepartmentMapper;
 import com.pyr.permission.domain.department.model.SysDepartment;
-import com.pyr.permission.domain.role.dto.AclDto;
 import com.pyr.permission.domain.role.mapper.SysAclMapper;
 import com.pyr.permission.domain.role.mapper.SysAclModuleMapper;
 import com.pyr.permission.domain.role.model.SysAcl;
 import com.pyr.permission.domain.role.model.SysAclModule;
 import com.pyr.permission.domain.role.service.SysCoreService;
+import com.pyr.permission.domain.role.vo.AclVo;
 import lombok.val;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,17 +68,17 @@ public class SysTreeService {
      * @param roleId 角色Id
      * @return 根据权限模块分类后的权限点的树状结构
      */
-    public List<AclModuleLevelDto> roleTree(int roleId) {
+    public List<AclModuleLevelDto> roleTree(Long roleId) {
         List<SysAcl> allAcl = sysAclMapper.getAll();
         List<Long> aclIdsByRole = sysCoreService.getRoleAclList(roleId).stream().map(SysAcl::getId).collect(Collectors.toList());
         val aclDtoList = allAcl.stream().map(acl -> {
-            AclDto aclDto = (AclDto) SysBeanUtil.convert(acl, AclDto.class);
+            AclVo aclVo = (AclVo) SysBeanUtil.convert(acl, AclVo.class);
             if (aclIdsByRole.contains(acl.getId())) {
-                aclDto.setChecked(true);
+                aclVo.setChecked(true);
             }
             // 目前所有人都可以设置所有的权限，没有存在某个人，对某些权限禁用的设计
-            aclDto.setDisable(false);
-            return aclDto;
+            aclVo.setDisable(false);
+            return aclVo;
         }).collect(Collectors.toList());
         return aclListToTree(aclDtoList);
     }
@@ -156,14 +156,14 @@ public class SysTreeService {
         }
     }
 
-    private List<AclModuleLevelDto> aclListToTree(List<AclDto> aclDtoList) {
-        if (CollectionUtils.isEmpty(aclDtoList)) {
+    private List<AclModuleLevelDto> aclListToTree(List<AclVo> aclVoList) {
+        if (CollectionUtils.isEmpty(aclVoList)) {
             return Lists.newArrayList();
         }
         List<AclModuleLevelDto> aclModuleLevelList = aclModuleTree();
 
-        Multimap<Long, AclDto> moduleIdAclMap = ArrayListMultimap.create();
-        for (AclDto acl : aclDtoList) {
+        Multimap<Long, AclVo> moduleIdAclMap = ArrayListMultimap.create();
+        for (AclVo acl : aclVoList) {
             if (acl.getStatus() == 1) {
                 moduleIdAclMap.put(acl.getAclModuleId(), acl);
             }
@@ -172,15 +172,15 @@ public class SysTreeService {
         return aclModuleLevelList;
     }
 
-    private void bindAclsWithOrder(List<AclModuleLevelDto> aclModuleLevelList, Multimap<Long, AclDto> moduleIdAclMap) {
+    private void bindAclsWithOrder(List<AclModuleLevelDto> aclModuleLevelList, Multimap<Long, AclVo> moduleIdAclMap) {
         if (CollectionUtils.isEmpty(aclModuleLevelList)) {
             return;
         }
         for (AclModuleLevelDto dto : aclModuleLevelList) {
-            List<AclDto> aclDtoList = (List<AclDto>) moduleIdAclMap.get(dto.getId());
-            if (CollectionUtils.isNotEmpty(aclDtoList)) {
-                aclDtoList.sort(Comparator.comparingInt(SysAcl::getSeq));
-                dto.setAclList(aclDtoList);
+            List<AclVo> aclVoList = (List<AclVo>) moduleIdAclMap.get(dto.getId());
+            if (CollectionUtils.isNotEmpty(aclVoList)) {
+                aclVoList.sort(Comparator.comparingInt(SysAcl::getSeq));
+                dto.setAclList(aclVoList);
             }
             bindAclsWithOrder(dto.getAclModuleList(), moduleIdAclMap);
         }

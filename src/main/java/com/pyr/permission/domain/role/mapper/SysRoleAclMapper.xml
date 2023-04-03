@@ -15,116 +15,6 @@
         id
         , role_id, acl_id, remark, creator_id, update_time,update_time,creator_ip
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from sys_role_acl
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete
-        from sys_role_acl
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" parameterType="com.pyr.permission.domain.role.model.SysRoleAcl">
-        insert into sys_role_acl (id, role_id, acl_id,
-                                  remark, creator_id, create_time,
-                                  creatorIp)
-        values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{aclId,jdbcType=INTEGER},
-                #{remark,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-                #{creatorIp,jdbcType=VARCHAR})
-    </insert>
-    <insert id="insertSelective" parameterType="com.pyr.permission.domain.role.model.SysRoleAcl">
-        insert into sys_role_acl
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="roleId != null">
-                role_id,
-            </if>
-            <if test="aclId != null">
-                acl_id,
-            </if>
-            <if test="remark != null">
-                remark,
-            </if>
-            <if test="creatorId != null">
-                creator_id,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="creatorIp != null">
-                creatorIp,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="roleId != null">
-                #{roleId,jdbcType=INTEGER},
-            </if>
-            <if test="aclId != null">
-                #{aclId,jdbcType=INTEGER},
-            </if>
-            <if test="remark != null">
-                #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="creatorId != null">
-                #{creator,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="creatorIp != null">
-                #{creatorIp,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.pyr.permission.domain.role.model.SysRoleAcl">
-        update sys_role_acl
-        <set>
-            <if test="roleId != null">
-                role_id = #{roleId,jdbcType=INTEGER},
-            </if>
-            <if test="aclId != null">
-                acl_id = #{aclId,jdbcType=INTEGER},
-            </if>
-            <if test="remark != null">
-                remark = #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="creatorId != null">
-                creator_id = #{creatorId,jdbcType=INTEGER},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="creatorIp != null">
-                creatorIp = #{creatorIp,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.pyr.permission.domain.role.model.SysRoleAcl">
-        update sys_role_acl
-        set role_id     = #{roleId,jdbcType=INTEGER},
-            acl_id      = #{aclId,jdbcType=INTEGER},
-            remark      = #{remark,jdbcType=VARCHAR},
-            creator_id  = #{creatorId,jdbcType=INTEGER},
-            create_time = #{createTime,jdbcType=TIMESTAMP},
-            update_time = #{updateTime,jdbcType=TIMESTAMP},
-            creatorIp   = #{creatorIp,jdbcType=VARCHAR}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
     <select id="getAclIdListByRoleIdList" parameterType="map" resultType="long">
         SELECT acl_id
         FROM sys_role_acl
@@ -141,10 +31,11 @@
     </delete>
 
     <insert id="batchInsert" parameterType="map">
-        insert into sys_role_acl (role_id, acl_id, operator, operate_time, operate_ip)
+        insert into sys_role_acl (id, role_id, acl_id, creator_id, create_time, creator_ip)
         values
         <foreach collection="roleAclList" item="roleAcl" separator=",">
-            (#{roleAcl.roleId}, #{roleAcl.aclId}, #{roleAcl.operator}, #{roleAcl.operateTime}, #{roleAcl.operateIp})
+            (#{roleAcl.id}, #{roleAcl.roleId}, #{roleAcl.aclId}, #{roleAcl.creatorId}, #{roleAcl.createTime},
+            #{roleAcl.creatorIp})
         </foreach>
     </insert>
     <select id="getRoleIdListByAclId" parameterType="long" resultType="long">

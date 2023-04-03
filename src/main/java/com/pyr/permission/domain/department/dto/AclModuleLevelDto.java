@@ -1,8 +1,8 @@
 package com.pyr.permission.domain.department.dto;
 
 import com.google.common.collect.Lists;
-import com.pyr.permission.domain.role.dto.AclDto;
 import com.pyr.permission.domain.role.model.SysAclModule;
+import com.pyr.permission.domain.role.vo.AclVo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,7 +17,7 @@ public class AclModuleLevelDto extends SysAclModule {
 
     private List<AclModuleLevelDto> aclModuleList = Lists.newArrayList();
 
-    private List<AclDto> aclList = Lists.newArrayList();
+    private List<AclVo> aclList = Lists.newArrayList();
 
 
     public static AclModuleLevelDto adapt(SysAclModule aclModule) {

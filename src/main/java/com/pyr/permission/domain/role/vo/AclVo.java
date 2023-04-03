@@ -1,4 +1,4 @@
-package com.pyr.permission.domain.role.dto;
+package com.pyr.permission.domain.role.vo;
 
 import com.pyr.permission.domain.role.model.SysAcl;
 import lombok.Setter;
@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Setter
 @ToString
-public class AclDto extends SysAcl {
+public class AclVo extends SysAcl {
 
     // 是否要默认选中
     private boolean checked = false;

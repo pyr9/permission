@@ -18,8 +18,8 @@ public class SysCoreService {
     @Resource
     private SysRoleAclMapper sysRoleAclMapper;
 
-    public List<SysAcl> getRoleAclList(int roleId) {
-        List<Integer> aclIdList = sysRoleAclMapper.getAclIdListByRoleIdList(Lists.<Integer>newArrayList(roleId));
+    public List<SysAcl> getRoleAclList(long roleId) {
+        List<Long> aclIdList = sysRoleAclMapper.getAclIdListByRoleIdList(Lists.<Long>newArrayList(roleId));
         if (CollectionUtils.isEmpty(aclIdList)) {
             return Lists.newArrayList();
         }

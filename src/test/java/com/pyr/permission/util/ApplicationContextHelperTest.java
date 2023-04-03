@@ -18,7 +18,7 @@ public class ApplicationContextHelperTest {
     @Test
     public void test() {
         SysAclModuleMapper moduleMapper = ApplicationContextHelper.popBean(SysAclModuleMapper.class);
-        SysAclModule module = moduleMapper.selectByPrimaryKey(1);
+        SysAclModule module = moduleMapper.selectById(1);
         log.info(JsonMapper.obj2String(module));
     }
 

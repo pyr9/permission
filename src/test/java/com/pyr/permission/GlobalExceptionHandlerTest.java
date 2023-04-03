@@ -43,7 +43,7 @@ public class GlobalExceptionHandlerTest {
         System.out.println("开始查询...");
         List<SysUser> userList = new ArrayList<>();
         SysUser user2 = new SysUser();
-        user2.setId(1);
+        user2.setId(1L);
         user2.setUserName("xuwujing");
         userList.add(user2);
         return userList;
