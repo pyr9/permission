@@ -17,4 +17,6 @@ public interface SysRoleUserMapper extends BaseMapper<SysRoleUser> {
     void batchInsert(@Param("roleUserList") List<SysRoleUser> roleUserList);
 
     List<Long> getRoleIdListByUserId(@Param("userId") long userId);
+
+    List<Long> getUserIdsByRoleIds(@Param("roleIdList") List<Long> roleIdList);
 }
