@@ -39,13 +39,11 @@ public class SysCoreService {
         if (isSuperAdmin()) {
             return true;
         }
-
 //        <!-- url is not null and url != '' and  #{url} REGEXP url-->
         List<SysAcl> aclList = sysAclMapper.getByUrl(url);
         if (CollectionUtils.isEmpty(aclList)) {
             return true;
         }
-
         List<SysAcl> userAclList = getCurrentUserAclList();
         Set<Long> userAclIdSet = userAclList.stream().map(BaseEntity::getId).collect(Collectors.toSet());
 
@@ -62,10 +60,7 @@ public class SysCoreService {
                 return true;
             }
         }
-        if (!hasValidAcl) {
-            return true;
-        }
-        return false;
+        return !hasValidAcl;
     }
 
     public List<SysAcl> getCurrentUserAclList() {
