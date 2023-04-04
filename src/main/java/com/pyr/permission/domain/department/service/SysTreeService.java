@@ -185,4 +185,16 @@ public class SysTreeService {
             bindAclsWithOrder(dto.getAclModuleList(), moduleIdAclMap);
         }
     }
+
+    public List<AclModuleLevelDto> userAclTree(long userId) {
+        List<SysAcl> userAclList = sysCoreService.getUserAcls(userId);
+        List<AclVo> aclVos = Lists.newArrayList();
+        for (SysAcl acl : userAclList) {
+            AclVo aclVo = (AclVo) SysBeanUtil.convert(acl, AclVo.class);
+            aclVo.setDisable(false);
+            aclVo.setChecked(true);
+            aclVos.add(aclVo);
+        }
+        return aclListToTree(aclVos);
+    }
 }

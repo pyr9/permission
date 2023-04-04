@@ -35,4 +35,11 @@
             #{roleUser.creatorIp})
         </foreach>
     </insert>
+
+    <select id="getRoleIdListByUserId" parameterType="map" resultType="long">
+        SELECT role_id
+        FROM sys_role_user
+        WHERE user_id = #{userId}
+    </select>
+
 </mapper>
