@@ -15,4 +15,12 @@ public class GsonUtil {
                 .create();
         return gson.toJson(object);
     }
+
+    public static String voToI18nText(Object object, String customVuexName) {
+        val gson = new GsonBuilder()
+                .setFieldNamingStrategy(new VoI18nStrategy())
+                .setExclusionStrategies(new VoExclusionStrategy(customVuexName))
+                .create();
+        return gson.toJson(object);
+    }
 }

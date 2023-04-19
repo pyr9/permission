@@ -7,13 +7,13 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SysUserVo {
-    @I18nText("用户名")
+    @I18nText(value = "用户名", customVuex = {"sith", "vendor"})
     private String userName;
 
-    @I18nText("电话号码")
+    @I18nText(value = "电话号码", customVuex = {"sith"})
     private String telephone;
 
-    @I18nText("邮箱")
+    @I18nText(value = "邮箱", customVuex = {"sith", "vendor"})
     private String mail;
 
     private String password;
