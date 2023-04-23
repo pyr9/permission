@@ -44,6 +44,8 @@ public class SysCoreService {
         if (CollectionUtils.isEmpty(aclList)) {
             return true;
         }
+
+        // TODO: 2023/4/23 这里获取到的 userAclList 可以通过添加redis缓存来提高性能
         List<SysAcl> userAclList = getCurrentUserAclList();
         Set<Long> userAclIdSet = userAclList.stream().map(BaseEntity::getId).collect(Collectors.toSet());
 
