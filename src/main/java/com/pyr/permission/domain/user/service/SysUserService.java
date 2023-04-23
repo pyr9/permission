@@ -11,16 +11,24 @@ import com.pyr.permission.common.util.SysBeanUtil;
 import com.pyr.permission.domain.user.mapper.SysUserMapper;
 import com.pyr.permission.domain.user.model.SysUser;
 import com.pyr.permission.domain.user.param.UserParam;
+import lombok.val;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.recipes.locks.InterProcessMutex;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class SysUserService {
 
     @Resource
     private SysUserMapper sysUserMapper;
+
+    @Autowired
+    private CuratorFramework zkClient;
 
 
     public void save(UserParam param) {
@@ -31,6 +39,15 @@ public class SysUserService {
         user.setPassword(MD5Util.encrypt(password));
         // TODO: sendEmail
         sysUserMapper.insert(user);
+    }
+
+    public int insertUser(SysUser user, String token) throws Exception {
+        InterProcessMutex lock = new InterProcessMutex(zkClient, "/" + token);
+        val isLock = lock.acquire(30, TimeUnit.SECONDS);
+        if (isLock) {
+            return sysUserMapper.insert(user);
+        }
+        return 0;
     }
 
     public void update(UserParam param) {
