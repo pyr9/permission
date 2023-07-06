@@ -44,10 +44,10 @@ public class SysLoginController {
     }
 
     @RequestMapping("/logout")
-    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public ResultBody logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        // 需要返回code200
         request.getSession().invalidate();
-        String path = "signin.jsp";
-        response.sendRedirect(path);
+        return ResultBody.success();
     }
 
     private String checkUser(String username, String password, SysUser sysUser) {
