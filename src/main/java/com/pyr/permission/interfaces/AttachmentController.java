@@ -21,65 +21,10 @@ import java.util.zip.ZipOutputStream;
 @Slf4j
 @RestController
 public class AttachmentController {
+    public static final int BUFFER_SIZE = 1024;
+    public static final int ZERO = 0;
     private static final String DATE_FORMAT = "MM/dd/yyyy_HH-mm-ss";
     private static final DateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
-
-    /**
-     * 将指定目录的单个文件下载到浏览器
-     * 前端： console: window.location.href = " http://localhost:9099/file/download";
-     */
-    @GetMapping("file/download")
-    public void downloadDevtool(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        File file = new File(getFileUrls().get(0));
-        String filename = "测试文件下载";
-        response.setContentType("application/x-download");
-        response.setHeader("content-Disposition", "attachment;filename=" + filename);
-        InputStream in = null;
-        try {
-            in = Files.newInputStream(file.toPath());
-            int len = 0;
-            byte[] buffer = new byte[1024];
-            OutputStream out = response.getOutputStream();
-            while ((len = in.read(buffer)) > 0) {
-                out.write(buffer, 0, len);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-    }
-
-    /**
-     * 将指定目录的多个文件下载到浏览器，并打包成zip
-     * 前端： console: window.location.href = " http://localhost:9099/file/batch/download";
-     */
-    @GetMapping("file/batch/download")
-    public void zipFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String zipFileName = "压缩包" + formatter.format(new Date()) + ".zip";
-        BufferedOutputStream bos;
-        FileInputStream in;
-        ZipOutputStream out;
-        try {
-            setResponse(response, zipFileName, request);
-            bos = new BufferedOutputStream(response.getOutputStream());
-            out = new ZipOutputStream(bos);
-            writeToZip(out);
-            out.close();
-            bos.close();
-            log.info("========= 文件压缩成功 ============");
-        } catch (Exception e) {
-            throw new Exception("zipFile_error" + this.getClass().getSimpleName() + "zipfile_download_error");
-        }
-    }
 
     private static void writeToZip(ZipOutputStream out) throws IOException {
         FileInputStream in;
@@ -130,5 +75,49 @@ public class AttachmentController {
             e.printStackTrace();
         }
         return zipFileName;
+    }
+
+    /**
+     * 将指定目录的单个文件下载到浏览器
+     * 前端： console: window.location.href = " http://localhost:9099/file/download";
+     */
+    @GetMapping("file/download")
+    public void downloadDevtool(HttpServletResponse response) throws IOException {
+        File file = new File(getFileUrls().get(0));
+        String filename = "测试文件下载";
+        response.setHeader("Content-Disposition", "attachment; filename=" + filename);
+        try (InputStream in = Files.newInputStream(file.toPath());
+             OutputStream out = response.getOutputStream()) {
+            byte[] buffer = new byte[BUFFER_SIZE];
+            int len;
+            while ((len = in.read(buffer)) > ZERO) {
+                out.write(buffer, ZERO, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 将指定目录的多个文件下载到浏览器，并打包成zip
+     * 前端： console: window.location.href = " http://localhost:9099/file/batch/download";
+     */
+    @GetMapping("file/batch/download")
+    public void zipFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String zipFileName = "压缩包" + formatter.format(new Date()) + ".zip";
+        BufferedOutputStream bos;
+        FileInputStream in;
+        ZipOutputStream out;
+        try {
+            setResponse(response, zipFileName, request);
+            bos = new BufferedOutputStream(response.getOutputStream());
+            out = new ZipOutputStream(bos);
+            writeToZip(out);
+            out.close();
+            bos.close();
+            log.info("========= 文件压缩成功 ============");
+        } catch (Exception e) {
+            throw new Exception("zipFile_error" + this.getClass().getSimpleName() + "zipfile_download_error");
+        }
     }
 }
