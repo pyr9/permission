@@ -191,6 +191,11 @@
             <artifactId>mpxj</artifactId>
             <version>10.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>9.4.1.jre8</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.hynnet/jacob -->
         <dependency>
@@ -198,6 +203,12 @@
             <artifactId>jacob</artifactId>
             <version>1.18</version>
         </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.7.3</version>
+        </dependency>
+
     </dependencies>
     <build>
         <resources>
