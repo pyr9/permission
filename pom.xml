@@ -234,6 +234,16 @@
                 </includes>
                 <filtering>false</filtering>
             </resource>
+            <resource>
+                <!-- directory 表示取该目录下的文件 -->
+                <directory>libs</directory>
+                <!--targetPath 指定打包到哪个目录下  默认是放到class目录下-->
+                <targetPath>/BOOT-INF/lib/</targetPath>
+                <!-- 取符合格式的所有文件  *代表全部 -->
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
+            </resource>
         </resources>
         <plugins>
             <plugin>
@@ -271,6 +281,13 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
             </plugin>
         </plugins>
     </build>
