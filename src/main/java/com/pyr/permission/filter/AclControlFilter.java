@@ -21,7 +21,6 @@ import static com.pyr.permission.common.exception.CommonEnum.FORBIDDEN;
 @Slf4j
 public class AclControlFilter implements HandlerInterceptor {
 
-
     /**
      * 用户没登录或者没权限，都应该跳转至403页面
      */
