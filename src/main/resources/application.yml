@@ -4,9 +4,9 @@ server:
 ## database ##
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/permission
+    url: jdbc:postgresql://39.98.221.38:5432/tms?currentSchema=default
     username: postgres
-    password: 123
+    password: postgres
     driver-class-name: org.postgresql.Driver
   flyway:
     enabled: true

@@ -4,7 +4,7 @@
 <generatorConfiguration>
     <!-- 数据库驱动包位置 -->
     <classPathEntry
-            location="D:\software\maven\repository\com\microsoft\sqlserver\mssql-jdbc\9.4.1.jre8\mssql-jdbc-9.4.1.jre8.jar"/>
+            location="/Users/panyurou/.m2/repository/org/postgresql/postgresql/42.2.23/postgresql-42.2.23.jar"/>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <commentGenerator>
@@ -13,74 +13,35 @@
             <property name="suppressDate" value="false"/> <!--是否生成注释代时间戳 -->
         </commentGenerator>
         <!-- 数据库链接URL、用户名、密码 -->
-        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                        connectionURL="jdbc:sqlserver://39.98.221.38;database=INFlowsDB"
-                        userId="sa" password="Mmf@123$%^&amp;">  <!-- 2 -->
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://39.98.221.38:5432/tms?currentSchema=default?characterEncoding=utf8&amp;serverTimezone=UTC"
+                        userId="postgres" password="postgres">  <!-- 2 -->
         </jdbcConnection>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
-        <!-- 生成模型的包名和位置 --> <!-- 3 -->
+        <!-- 生成模型的包名和位置 -->
         <javaModelGenerator targetPackage="com.pyr.permission.model"
                             targetProject="/Users/panyurou/learn/permission/permission/src">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
-        <!-- 生成的映射文件包名和位置 --> <!-- 4 -->
-        <sqlMapGenerator targetPackage="com.pyr.permission.mapper"
-                         targetProject="D:\UserData\z004nnre\learn\permission\src">
+
+        <!-- 生成的映射文件包名和位置 -->
+        <sqlMapGenerator targetPackage="com.corleone.user.menu.mapper"
+                         targetProject="/Users/panyurou/learn/permission/permission/src">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
-        <!-- 生成DAO的包名和位置 --> <!-- 5 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.pyr.permission.mapper"
-                             targetProject="D:\UserData\z004nnre\learn\permission\src">
-            <property name="enableSubPackages" value="true"/>
+
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.corleone.user.menu.mapper"
+                             targetProject="/Users/panyurou/learn/permission/permission/src">
+            <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
-        <!-- 要生成那些表(更改tableName和domainObjectName就可以) --><!-- 6 -->
-        <table tableName="BIZ_INNOMOTICS_marcom_master_data_maintenance_marcomBudgetInfo"
-               domainObjectName="marcomPlanData"
-               enableCountByExample="true"
-               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"/>
-        <table tableName="BIZ_INNOMOTICS_marcom_plan_base_data" domainObjectName="marcomPlanBaseData"
-               enableCountByExample="false"
-               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"/>
-        <table tableName="BIZ_INNOMOTICS_marcom_master_data_maintenance_tFSNomanationList"
-               domainObjectName="iLDNominationList"
-               enableCountByExample="false"
-               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"/>
-        <table tableName="BIZ_INNOMOTICS_ILD_nomination_list_base" domainObjectName="iLDNominationListBase"
-               enableCountByExample="false"
-               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"/>
-        <!--        <table tableName="BIZ_INNOMOTICS_ILD_nomination_list_sub_form" domainObjectName="iLDNominationListSubForm"-->
-        <!--               enableCountByExample="true"-->
-        <!--               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
-        <!--               selectByExampleQueryId="true"/>-->
-        <!--        <table tableName="sys_user" domainObjectName="SysUser" enableCountByExample="false"-->
-        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--               selectByExampleQueryId="false"/>-->
-        <!--        <table tableName="sys_department" domainObjectName="SysDepartment" enableCountByExample="false"-->
-        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--               selectByExampleQueryId="false"/>-->
-        <!--        <table tableName="sys_acl" domainObjectName="SysAcl" enableCountByExample="false" enableUpdateByExample="false"-->
-        <!--               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>-->
-        <!--        <table tableName="sys_acl_module" domainObjectName="SysAclModule" enableCountByExample="false"-->
-        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--               selectByExampleQueryId="false"/>-->
-        <!--        <table tableName="sys_role" domainObjectName="SysRole" enableCountByExample="false"-->
-        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--               selectByExampleQueryId="false"/>-->
-        <!--        <table tableName="sys_role_acl" domainObjectName="SysRoleAcl" enableCountByExample="false"-->
-        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--               selectByExampleQueryId="false"/>-->
-        <!--        <table tableName="sys_role_user" domainObjectName="SysRoleUser" enableCountByExample="false"-->
-        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--               selectByExampleQueryId="false"/>-->
-        <!--        <table tableName="sys_log" domainObjectName="SysLog" enableCountByExample="false" enableUpdateByExample="false"-->
-        <!--               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>-->
+
+        <!-- 要生成那些表 -->
+        <table tableName="menu" domainObjectName="Menu" enableCountByExample="true" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="true"/>
     </context>
 </generatorConfiguration>

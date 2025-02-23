@@ -96,7 +96,6 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <!-- validator -->
         <dependency>
@@ -237,7 +236,7 @@
     <build>
         <resources>
             <resource>
-                <directory>src/lib</directory>
+                <directory>src/libs</directory>
                 <targetPath>BOOT-INF/lib</targetPath>
             </resource>
             <resource>
@@ -256,6 +255,9 @@
                     <include>**/*.yml</include>
                     <include>**/*.sql</include>
                 </includes>
+                <excludes>
+                    <exclude>lib/*.jar</exclude>
+                </excludes>
                 <filtering>false</filtering>
             </resource>
             <resource>
@@ -268,6 +270,12 @@
                     <include>**/*.jar</include>
                 </includes>
             </resource>
+            <!--            <resource>-->
+            <!--                <directory>${basedir}src/main/resources</directory>-->
+            <!--                <excludes>-->
+            <!--                    <exclude>lib/*.jar</exclude>-->
+            <!--                </excludes>-->
+            <!--            </resource>-->
         </resources>
         <plugins>
             <plugin>
